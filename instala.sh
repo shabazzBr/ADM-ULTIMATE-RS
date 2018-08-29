@@ -136,9 +136,7 @@ id="es"
 ;;
 esac
 echo -e "${cor[1]}=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠"
-echo -e ""
-echo -e "${cor[2]} $(source trans -b pt:${id} "")\n\033[1;33m Script Modificado por:\033[1;33m@TwoSSH (FREE)\033[0m"
-echo -e ""
+echo -e "${cor[2]} $(source trans -b pt:${id} "")\n\033[1;33m Script Mod by:\033[1;37m@TwoSSH\033[0m"
 echo -e "${cor[1]}=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠"
 echo -e "${cor[5]} $(source trans -b pt:${id} "INSTALADOR ADM-SCRIPTS") ®"
 echo -e "${cor[1]}=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠=≠"
