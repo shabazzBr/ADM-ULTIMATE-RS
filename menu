@@ -36,12 +36,12 @@ funcao_verificacao > /dev/null 2>&1
 source menu
 exit
 ;;
-7)
+zzzz)
 funcao_idioma
 source menu
 exit
 ;;
-8)
+7)
 if [[ -e /etc/bash.bashrc-bakup ]]; then
 mv -f /etc/bash.bashrc-bakup /etc/bash.bashrc
 cat /etc/bash.bashrc | grep -v "/bin/adm" > /tmp/bash
@@ -62,14 +62,14 @@ sleep 2s
 source menu
 exit
 ;;
-9)
+8)
 $value > /dev/null 2>&1
 chmod +x /etc/adm-lite/*
 [[ -e /etc/adm-lite/idioma_menuinst ]] && idioma=$(cat /etc/adm-lite/idioma_menuinst|head -1) || idioma="pt"
 value=$(vary_rex "2f6574632f61646d2d6c6974652f6d656e755f696e7374")
 ${value} ${idioma}
 ;;
-10)
+zzzzz)
 echo -e "${cor[1]} =================================== ${cor[0]}"
 echo -e "${cor[2]}  https://youtube.com/RealHackRWAM    "
 echo -e "${cor[1]} =================================== ${cor[0]}"
