@@ -32,7 +32,7 @@ sed -i "s;.raw];CONNECT ${hostprox}:22 HTTP/1.0;g" ${payload}
 sed -i "s;.netData];CONNECT ${hostprox}:22 HTTP/1.0;g" ${payload}
 sed -i "s;.realData];CONNECT ${hostprox}:22 HTTP/1.0;g" ${payload}
 }
-bar="======================================================="
+bar="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 cor="\033[0m \033[1;31m \033[1;32m \033[1;33m \033[1;34m \033[1;33m"
 cor=($cor)
 esquelet="./payloads.txt"
