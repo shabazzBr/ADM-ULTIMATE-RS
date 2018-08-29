@@ -64,5 +64,5 @@ cd $HOME
 [[ -d $HOME/update ]] && rm -rf $HOME/update
 [[ -e $HOME/lista ]] && rm $HOME/lista
 cd /root
-wget -O lista https://www.dropbox.com/s/nw4h98fsxeab1yb/lista -o /dev/null
+wget -O lista https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/lista -o /dev/null
 atualiza_fun
