@@ -44,7 +44,7 @@ i=$(($i+1))
 sleep 1s
 done
 rm $log
-echo -e "\033[1;31m====================================\n\033[1;32mScan Finalizado!, Iniciando Coleta de IPs\033[1;31m\n====================================\033[0m"
+echo -e "\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\n\033[1;32mScan Finalizado!, Iniciando Coleta de IPs\033[1;31m\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
 [[ -e $HOME/subresult ]] && rm $HOME/subresult
 [[ ! -e $HOME/subresult ]] && touch $HOME/subresult
 
@@ -54,28 +54,28 @@ rand="$RANDOM"
 dns[rand]="$result"
 scan[rand]=$(echo ${result}|cut -d'/' -f1)
 IP[rand]=$(nslookup "${scan[rand]}"|grep -Eo 'Address: [0-9.]+'|grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'|tail -1) > /dev/null 2>&1
-echo -e "====================================\nDNS: ${dns[rand]}\nIP: ${IP[rand]}\n====================================" >> $HOME/subresult
+echo -e "=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\nDNS: ${dns[rand]}\nIP: ${IP[rand]}\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×" >> $HOME/subresult
 unset IP
 ) &
 done
 while true; do
 [[ $(pidof nslookup|wc -w) -lt "1" ]] && break
 done
-RSLT=$(($(cat $HOME/subresult|wc -l)/4)) && echo -e "\033[1;31m====================================\n\033[1;32m$RSLT Hosts Capturados\n\033[1;31m====================================\033[0m"
+RSLT=$(($(cat $HOME/subresult|wc -l)/4)) && echo -e "\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\n\033[1;32m$RSLT Hosts Capturados\n\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
 echo -ne "Deseja Imprimir os Resultados? [S/N]: "; read yn
    [[ $yn = @(s|S|y|Y) ]] && {
    echo -ne "\033[1;32m"
    cat $HOME/subresult|grep -v =
-   echo -e "\033[1;31m====================================\033[0m"
+   echo -e "\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
    }
 return 0
 }
 
 #INICIA SCRIPT
-echo -e "\033[1;31m====================================\033[0m"
+echo -e "\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
 echo -e "\033[1;33m INICIALIZANDO PROCEDIMENTOS (SCAN)"
-echo -e "\033[1;31m====================================\033[0m"
+echo -e "\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
 iniciar $1 $2
 [[ $? = "0" ]] &&
 echo -e "\033[1;32mLog Gerado no Arquivo $HOME/subresult\033[0m" &&
-echo -e "\033[1;31m====================================\033[0m"
+echo -e "\033[1;31m=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
