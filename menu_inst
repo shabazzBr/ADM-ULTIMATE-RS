@@ -778,8 +778,6 @@ exit 0' > $RCLOCAL
 	echo "client
 dev tun
 proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
 remote / $PORT
 http-proxy-option CUSTOM-HEADER Host portalrecarga.vivo.com.br/recarga
 http-proxy $IP 80
@@ -789,19 +787,18 @@ persist-key
 persist-tun
 remote-cert-tls server
 cipher AES-128-CBC
-comp-lzo yes
+comp-lzo
 setenv opt block-outside-dns
 key-direction 1
-verb 3
 auth-user-pass
-keepalive 10 20
+verb 3
 float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "$CLIENT"
 	echo ""
 	echo "Concluido!"
 	echo ""
-	echo "Seu arquivo está disponivel em" ~/"$CLIENT.ovpn"
+	echo "Seu arquivo está disponivel em" ~/"$CLIENT.zip"
 fi
 return 0
 }
