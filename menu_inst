@@ -460,7 +460,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 		echo "   1) Adicionar novo usuário"
 		echo "   2) Remover um usuário"
 		echo "   3) Remover OpenVPN"
-		echo "   4) Sair"
+		echo "   0) Voltar"
 		read -p "Selecione a opção [1-4]: " option
 		case $option in
 			1) 
@@ -510,8 +510,8 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			;;
 			3) 
 			echo ""
-			read -p "Você deseja remover OpenVPN? [y/n]: " -e -i n REMOVE
-			if [[ "$REMOVE" = 'y' ]]; then
+			read -p "Você deseja remover OpenVPN? [s/n]: " -e -i n REMOVE
+			if [[ "$REMOVE" = 's|S' ]]; then
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				IP=$(grep 'iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to ' $RCLOCAL | cut -d " " -f 11)
@@ -554,7 +554,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			fi
 			exit
 			;;
-			4) exit;;
+			0) menu;;
 		esac
 	done
 else
@@ -595,10 +595,6 @@ else
 	echo "   7) Cloudflare (Recomendado como opção 2)"
 	read -p "DNS [1-7]: " -e -i 2 DNS
 	echo ""
-	echo "Agora,digite o nome de seu primeiro usuario"
-	echo "Use somente o nome,sem caracteres especiais"
-	read -p "Client name: " -e -i client CLIENT
-	echo ""
 	echo "Okay, você está pronto para executar o openvpn "
 	read -n1 -r -p "Pressione uma tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
@@ -626,7 +622,7 @@ else
 	./easyrsa --batch build-ca nopass
 	./easyrsa gen-dh
 	./easyrsa build-server-full server nopass
-	./easyrsa build-client-full $CLIENT nopass
+	./easyrsa build-client-full OPENVPN nopass
 	./easyrsa gen-crl
 	# Move the stuff we need
 	cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
@@ -794,13 +790,13 @@ auth-user-pass
 verb 3
 float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
-	newclient "$CLIENT"
+	newclient "OPENVPN"
 	echo ""
 	echo "Concluido!"
 	echo ""
-	echo "Seu arquivo está disponivel em" ~/"$CLIENT.zip"
-	zip $CLIENT $CLIENT.ovp
-	rm $CLIENT.ovp
+	echo "Seu arquivo está disponivel em" ~/"OPENVPN.zip"
+	zip OPENVPN OPENVPN.ovp
+	rm OPENVPN.ovp
 fi
 return 0
 }
