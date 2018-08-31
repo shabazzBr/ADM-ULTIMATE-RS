@@ -464,18 +464,9 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 		read -p "Selecione a opção [1-4]: " option
 		case $option in
 			1) 
-			echo ""
-			echo "Diga-me um nome para o usuario"
-			echo "Use somente o nome sem caracteres especiais"
-			read -p "Client name: " -e -i client CLIENT
-			cd /etc/openvpn/easy-rsa/
-			./easyrsa build-client-full $CLIENT nopass
-			# Generates the custom client.ovpn
-			newclient "$CLIENT"
-			echo ""
-			echo "Client $CLIENT added, configuration is available at" ~/"$CLIENT.ovpn"
-			exit
-			;;
+			nano /etc/openvpn/client-common.txt
+			sleep 1
+			menu;;
 			2)
 			# This option could be documented a bit better and maybe even be simplimplified
 			# ...but what can I say, I want some sleep too
@@ -506,8 +497,8 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 			echo ""
 			echo "Usuario removido"
-			exit
-			;;
+			sleep 1
+			menu;;
 			3) 
 			echo ""
 			read -p "Você deseja remover OpenVPN? [s/n]: " -e -i n REMOVE
@@ -552,9 +543,10 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				echo ""
 				echo "Remoção abordada!"
 			fi
-			exit
-			;;
-			0) menu;;
+			sleep 1
+			menu;;
+			0) 
+			menu;;
 		esac
 	done
 else
