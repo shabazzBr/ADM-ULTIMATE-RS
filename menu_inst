@@ -771,7 +771,8 @@ exit 0' > $RCLOCAL
 		fi
 	fi
 	# client-common.txt is created so we have a template to add further users later
-	echo "client
+	echo "# OVPN_ACCESS_SERVER_PROFILE=OpenVPN
+client
 dev tun
 proto $PROTOCOL
 remote / $PORT
@@ -794,13 +795,12 @@ float" > /etc/openvpn/client-common.txt
 	echo ""
 	echo "Concluido!"
 	echo ""
-	echo "Seu arquivo está disponivel em" ~/"OPENVPN.zip"
-	zip OPENVPN OPENVPN.ovp
-	rm OPENVPN.ovp
+	echo "Seu arquivo está disponivel em" ~/"OPENVPN.ovpn"
 fi
 return 0
 }
 
+# SHADOWSOCKS
 fun_shadowsocks () {
 [[ -e /etc/shadowsocks.json ]] && {
 [[ $(ps x|grep ssserver|grep -v grep|awk '{print $1}') != "" ]] && kill -9 $(ps x|grep ssserver|grep -v grep|awk '{print $1}') > /dev/null 2>&1 && ssserver -c /etc/shadowsocks.json -d stop > /dev/null 2>&1
