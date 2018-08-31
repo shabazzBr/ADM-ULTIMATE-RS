@@ -268,19 +268,19 @@ done
 
 fun_dropbear () {
  [[ -e /etc/default/dropbear ]] && {
- echo -e "$barra\n\033[1;32m $(source trans -b es:${id} "REMOVIENDO DROPBEAR")\n$barra"
+ echo -e "$barra\n\033[1;32m $(source trans -b es:${id} "REMOVENDO DROPBEAR")\n$barra"
  fun_bar "apt-get remove dropbear -y"
  echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "Dropbear Removido")\n$barra"
  [[ -e /etc/default/dropbear ]] && rm /etc/default/dropbear
  user -k 443/tcp > /dev/null 2>&1
  return 0
  }
-echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "INSTALADOR DROPBEAR ADM-ULTIMATE")\n$barra"
-echo -e " $(source trans -b es:${id} "DROPBEAR USA EL PUERTO 443")\033[1;37m"
+echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "INSTALADOR DROPBEAR")\n$barra"
+echo -e " $(source trans -b es:${id} "DROPBEAR USARÁ A PORTA 443")\033[1;37m"
 echo -e "$barra"
    [[ $(mportas|grep 443) != "" ]] && {
    echo -e "\033[1;31m $(source trans -b pt:${id} "PORTA 443 EM USO")\033[1;37m"
-   echo -e "\033[1;31m $(source trans -b es:${id} "INTENTE NUEVAMENTE")\033[1;37m"
+   echo -e "\033[1;31m $(source trans -b es:${id} "TENTE NOVAMENTE")\033[1;37m"
    fuser -k 443/tcp > /dev/null 2>&1
    echo -e "$barra"
    return 1
@@ -802,6 +802,7 @@ float" > /etc/openvpn/client-common.txt
 	echo "Concluido!"
 	echo ""
 	echo "Seu arquivo está disponivel em" ~/"$CLIENT.ovpn"
+fi
 return 0
 }
 
