@@ -683,7 +683,7 @@ ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo "keepalive 10 20
 float
 cipher AES-128-CBC
-comp-lzo yes
+comp-lzo
 user nobody
 group $GROUPNAME
 persist-key
@@ -799,6 +799,8 @@ float" > /etc/openvpn/client-common.txt
 	echo "Concluido!"
 	echo ""
 	echo "Seu arquivo está disponivel em" ~/"$CLIENT.zip"
+	zip $CLIENT $CLIENT.ovp
+	rm $CLIENT.ovp
 fi
 return 0
 }
