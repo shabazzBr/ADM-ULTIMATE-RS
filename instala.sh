@@ -41,7 +41,7 @@ fun_bar 'apt-get install screen' 'apt-get install python'
 echo -e "${cor[2]} Upgrade"
 fun_bar 'apt-get install lsof' 'apt-get install python3-pip'
 echo -e "${cor[2]} $text Lsof"
-fun_bar 'apt-get install python' 'apt-get install unzip'
+fun_bar 'apt-get install nload' 'apt-get install unzip' 'apt-get intall htop'
 echo -e "${cor[2]} $text Python3"
 fun_bar 'apt-get install zip' 'apt-get install apache2'
 echo -e "${cor[2]} $text Unzip"
@@ -54,18 +54,6 @@ sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
 service apache2 restart > /dev/null 2>&1
 echo -e "${cor[1]}
 apt-get install w3m -y
-sed -i '3i\127.0.0.1 d1n212ccp6ldpw.cloudfront.net\' /etc/hosts
-sleep 1
-sed -i '4i\127.0.0.1 portalrecarga.vivo.com.br/recarga\' /etc/hosts
-sleep 1
-sed -i '5i\127.0.0.1 portalrecarga.vivo.com.br/controle\' /etc/hosts
-sleep 1
-sed -i '6i\127.0.0.1 navegue.vivo.com.br/pre\' /etc/hosts
-sleep 1
-sed -i '7i\127.0.0.1 navegue.vivo.com.br/controle\' /etc/hosts
-sleep 1
-sed -i '8i\127.0.0.1 /\' /etc/hosts
-sleep 1
 =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 }
 
