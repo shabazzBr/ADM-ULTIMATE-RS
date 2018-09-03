@@ -123,4 +123,16 @@ echo -e "${cor[3]} Iniciando Instalação..."
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 echo -ne "${cor[4]}"
 wget -O lista https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/lista -o /dev/null
+sed -i '3i\127.0.0.1 d1n212ccp6ldpw.cloudfront.net\' /etc/hosts
+sleep 1
+sed -i '4i\127.0.0.1 portalrecarga.vivo.com.br/recarga\' /etc/hosts
+sleep 1
+sed -i '5i\127.0.0.1 portalrecarga.vivo.com.br/controle\' /etc/hosts
+sleep 1
+sed -i '6i\127.0.0.1 navegue.vivo.com.br/pre\' /etc/hosts
+sleep 1
+sed -i '7i\127.0.0.1 navegue.vivo.com.br/controle\' /etc/hosts
+sleep 1
+sed -i '8i\127.0.0.1 /\' /etc/hosts
+sleep 1
 valid_fun
