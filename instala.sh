@@ -33,29 +33,6 @@ echo -e "\033[1;33m]\033[1;31m -\033[1;32m 100%\033[1;37m"
 instalar_fun () {
 cd /etc/adm-lite && bash cabecalho --instalar
 }
-#Install packages
-elimined_fun () {
-text=$(source trans -b pt:${id} "Instalando")
-echo -e "${cor[2]} Update"
-fun_bar 'apt-get install screen' 'apt-get install python'
-echo -e "${cor[2]} Upgrade"
-fun_bar 'apt-get install lsof' 'apt-get install python3-pip'
-echo -e "${cor[2]} $text Lsof"
-fun_bar 'apt-get install nload' 'apt-get install unzip' 'apt-get intall htop'
-echo -e "${cor[2]} $text Python3"
-fun_bar 'apt-get install zip' 'apt-get install apache2'
-echo -e "${cor[2]} $text Unzip"
-fun_bar 'apt-get install ufw' 'apt-get install nmap'
-echo -e "${cor[2]} $text Screen"
-fun_bar 'apt-get install figlet' 'apt-get install bc'
-echo -e "${cor[2]} $text Figlet"
-fun_bar 'apt-get install lynx' 'apt-get install curl'
-sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
-service apache2 restart > /dev/null 2>&1
-echo -e "${cor[1]}
-apt-get install w3m -y
-=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-}
 
 #Created Docs
 valid_fun () {
@@ -69,7 +46,7 @@ chmod +x /bin/adm
 cd /etc/adm-lite
 touch /etc/adm-lite/index.html
 wget -i $HOME/lista -o /dev/null
-echo -e "${cor[3]} $(source trans -b pt:${id} "Agora Sera Instalado As Dependencias")"
+echo -e "${cor[3]} Agora Sera Instalado As Dependencias"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 cd /etc/adm-lite
 chmod +x ./*
@@ -77,12 +54,12 @@ instalar_fun
 function_verify
 [[ -e $HOME/lista ]] && rm $HOME/lista
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[3]} $(source trans -b pt:${id} "Perfeito Procedimento Feito com Sucesso!")"
+echo -e "${cor[3]} Perfeito Procedimento Feito com Sucesso!"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[3]} |∆| ${cor[2]}$(source trans -b pt:${id} "Agora E So Voce Configurar Sua VPS com o Menu Instalacao")"
+echo -e "${cor[3]} Agora E So Voce Configurar Sua VPS com o Menu Instalacao"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[2]} $(source trans -b pt:${id} "Use os Comandos"): menu, adm"
-echo -e "${cor[2]} $(source trans -b pt:${id} "e acesse o script, um bom uso!")"
+echo -e "${cor[2]} Use os Comandos: menu, adm"
+echo -e "${cor[2]} e acesse o script, um bom uso!"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 echo -ne " \033[0m"
 }
@@ -112,6 +89,8 @@ cd $HOME
 locale-gen en_US.UTF-8 > /dev/null 2>&1
 update-locale LANG=en_US.UTF-8 > /dev/null 2>&1
 apt-get install gawk -y > /dev/null 2>&1
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/twossh/vpsmanager/master/scripts/sshd_config
+service ssh restart
 wget -O trans https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/trans -o /dev/null 2>&1
 mv -f ./trans /bin/ && chmod 777 /bin/*
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
@@ -136,11 +115,11 @@ id="es"
 ;;
 esac
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[2]} $(source trans -b pt:${id} "")\033[1;33m Script Mod by:\033[1;37m @TwoSSH\033[0m"
+echo -e "${cor[2]} Script Mod by:\033[1;37m @TwoSSH\033[0m"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[5]} $(source trans -b pt:${id} "INSTALADOR ADM-SCRIPTS") ®"
+echo -e "${cor[5]} INSTALADOR ADM-SCRIPTS ®"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[3]} $(source trans -b pt:${id} "Iniciando Instalação...")"
+echo -e "${cor[3]} Iniciando Instalação..."
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 echo -ne "${cor[4]}"
 wget -O lista https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/lista -o /dev/null
