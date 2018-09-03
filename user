@@ -1,7 +1,7 @@
 #!/bin/bash
 source user-txt
 echo -ne "${cor[6]}"
-read -p " ${txt[9]} " _selecao
+read -p " OPÇÃO: " _selecao
 case $_selecao in
 0)
 source menu
@@ -10,7 +10,7 @@ exit
 1)
 source usercodes 1
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -18,7 +18,7 @@ exit
 2)
 source usercodes 2
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -26,7 +26,7 @@ exit
 3)
 source usercodes 3
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -34,7 +34,7 @@ exit
 4)
 source usercodes 4
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -42,7 +42,7 @@ exit
 5)
 source usercodes 5
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -50,7 +50,7 @@ exit
 6)
 source usercodes 6
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -58,7 +58,7 @@ exit
 7)
 source usercodes 7
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -66,7 +66,7 @@ exit
 8)
 source usercodes 8
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
@@ -74,7 +74,7 @@ exit
 9)
 source usercodes 9
 echo -ne "${cor[5]}"
-read -p " ${txt[47]}"
+read -p " Enter, Para Retornar!"
 cd /etc/adm-lite
 source user
 exit
