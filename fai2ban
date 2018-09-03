@@ -44,9 +44,9 @@ sleep 1s
 
 fail2ban_function () {
 if [ "$failtwoban" != "" ]; then
-echo -e "${cor[4]} ${txt[143]}"
-echo -e "${cor[2]} |1| •${cor[3]} ${txt[144]}"
-echo -e "${cor[2]} |2| •${cor[3]} ${txt[145]}"
+echo -e "${cor[4]} Fail2ban Ativo!, Deseja Ver o Log?"
+echo -e "${cor[2]} |1| •${cor[3]} Desinstalar"
+echo -e "${cor[2]} |2| •${cor[3]} Ver Log"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 read -p " [1|2]: " lo_og
 if [ "$lo_og" = "2" ]; then
@@ -60,13 +60,13 @@ echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=
 return
 fi
 
-echo -e "${cor[5]} ${txt[146]}"
-echo -e "${cor[5]} ${txt[147]}"
-echo -e "${cor[5]} ${txt[148]}"
-echo -e "${cor[5]} ${txt[149]}"
-echo -e "${cor[5]} ${txt[150]}"
-echo -e "${cor[5]} ${txt[151]}"
-echo -e "${cor[5]} ${txt[152]}"
+echo -e "${cor[5]} Este é o FAILBAN PROTECTION"
+echo -e "${cor[5]} Feito unicamente para proteger seu"
+echo -e "${cor[5]} Sistema, seu objetivo é analizar"
+echo -e "${cor[5]} LOGS DE ACESSO e bloquear toda e"
+echo -e "${cor[5]} qualquer ação suspeita"
+echo -e "${cor[5]} aumentando 70% sua segurança."
+echo -e "${cor[5]} Deseja Instalar o Fail2Ban?"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× \033[1;37m"
 read -p " [S/N]: " fail2ban
 if [[ "$fail2ban" = "s" || "$fail2ban" = "S" ]]; then
@@ -114,8 +114,8 @@ action_badips = badips.py[category="%(__name__)s", banaction="%(banaction)s", ag
 action_badips_report = badips[category="%(__name__)s", agent="%(fail2ban_agent)s"]
 action = %(action_)s' > /etc/fail2ban/jail.local
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-echo -e "${cor[5]} ${txt[153]}"
-echo -e "${cor[5]} ${txt[154]}"
+echo -e "${cor[5]} Fail2ban Sera Instalado"
+echo -e "${cor[5]} Nos Seguintes Serviços"
 if [ "$s1" != "" ]; then
 echo -ne " $s1"
 fi
@@ -130,7 +130,7 @@ echo -ne " $s4"
 fi
 echo -e ""
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-echo -e "${cor[5]} ${txt[155]}"
+echo -e "${cor[5]} Confirma a escolha?"
 read -p " [S/N]: " sim_nao
 if [[ "$sim_nao" = "s" || "$sim_nao" = "S" ]]; then
 if [ "$s1" != "" ]; then
@@ -461,7 +461,7 @@ logencoding = utf-8
 [haproxy-http-auth]
 logpath  = /var/log/haproxy.log' >> /etc/fail2ban/jail.local
 service fail2ban restart > /dev/null 2>&1
-echo -e "${cor[5]} ${txt[156]}"
+echo -e "${cor[5]} Instalação Concluída"
  fi
 fi
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
