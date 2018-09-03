@@ -29,13 +29,14 @@ rm $HOME/fim
 }
 instalar_fun () {
 cor[2]="\033[1;37m"
+
 text=$(source trans -b pt:${id} "Instalando")
 echo -e "${cor[2]} $text Curl"
 fun_bar 'apt-get install screen' 'apt-get install python'
 echo -e "${cor[2]} $text Nmap"
 fun_bar 'apt-get install lsof' 'apt-get install python3-pip'
 echo -e "${cor[2]} $text Lsof"
-fun_bar 'apt-get install python' 'apt-get install unzip'
+fun_bar 'apt-get install htop' 'apt-get install unzip' 'apt-get install nload'
 echo -e "${cor[2]} $text Python3"
 fun_bar 'apt-get install zip' 'apt-get install apache2'
 echo -e "${cor[2]} $text Unzip"
