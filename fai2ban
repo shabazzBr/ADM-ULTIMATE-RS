@@ -45,8 +45,8 @@ sleep 1s
 fail2ban_function () {
 if [ "$failtwoban" != "" ]; then
 echo -e "${cor[4]} ${txt[143]}"
-echo -e "${cor[2]} |1| >${cor[3]} ${txt[144]}"
-echo -e "${cor[2]} |2| >${cor[3]} ${txt[145]}"
+echo -e "${cor[2]} |1| •${cor[3]} ${txt[144]}"
+echo -e "${cor[2]} |2| •${cor[3]} ${txt[145]}"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 read -p " [1|2]: " lo_og
 if [ "$lo_og" = "2" ]; then
