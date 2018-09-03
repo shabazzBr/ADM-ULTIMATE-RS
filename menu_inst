@@ -867,11 +867,11 @@ IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,
 [[ -e /etc/adm-lite/sockdirect ]] && _sockdirect="\033[1;32mOn" || _sockdirect="\033[1;31mOff"
 [[ -e /etc/adm-lite/sockopen ]] && _sockopen="\033[1;32mOn" || _sockopen="\033[1;31mOff"
 echo -e "${barra}"
-echo -e "${cor[2]} [ 1 ] ${cor[3]}Socks Python SIMPLE ${_sockpub}"
-echo -e "${cor[2]} [ 2 ] ${cor[3]}Socks Python SEGURO ${_sockpriv}"
-echo -e "${cor[2]} [ 3 ] ${cor[3]}Socks Python DIRECTO ${_sockdirect}"
-echo -e "${cor[2]} [ 4 ] ${cor[3]}Socks Python OPENVPN ${_sockopen}"
-echo -e "${cor[2]} [ 5 ] ${cor[3]}Parar Socks Python \n${barra}"
+echo -e "${cor[2]} [1] •${cor[3]}Socks Python SIMPLE ${_sockpub}"
+echo -e "${cor[2]} [2] •${cor[3]}Socks Python SEGURO ${_sockpriv}"
+echo -e "${cor[2]} [3] •${cor[3]}Socks Python DIRECTO ${_sockdirect}"
+echo -e "${cor[2]} [4] •${cor[3]}Socks Python OPENVPN ${_sockopen}"
+echo -e "${cor[2]} [5] •${cor[3]}Parar Socks Python \n${barra}"
 while true; do
 read -p " Option: " portproxy
     case $portproxy in
