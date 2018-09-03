@@ -1,6 +1,6 @@
 #!/bin/bash
 source cabecalho
-[[ -e /etc/bash.bashrc-bakup ]] && _autorun="\033[1;32m[ ON ]" || _autorun="\033[1;31m[ OFF ]}"
+[[ -e /etc/bash.bashrc-bakup ]] && _autorun="\033[1;32m[ ON ]" || _autorun="\033[1;31m[ OFF ]"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 echo -e "${cor[2]}${cor[5]}MENU GERENCIADOR!"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
