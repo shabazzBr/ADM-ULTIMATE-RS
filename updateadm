@@ -9,12 +9,12 @@ arq2="$HOME/update/$1"
      return
      }
 equal=$(diff -q $arq $arq2)
-echo -e "\033[1;31m ${txt[203]}: $1"
+echo -e "\033[1;31m Analizando: $1"
      [[ "$equal" = "" ]] && rm $arq2 || {
      mv -f $arq2 $arq
      chmod +x $arq
      lista_atualizados=$(($lista_atualizados + 1))
-     echo -e "\033[1;32m ${txt[204]}: $1 - ${txt[205]}!"
+     echo -e "\033[1;32m Arquivo: $1 - Atualizado!"
      sleep 0.5s
      echo ""
      }
@@ -40,7 +40,7 @@ done
   [[ -e /etc/adm-lite/onlines ]] && rm /etc/adm-lite/onlines
   [[ -e $HOME/lista ]] && rm $HOME/lista
   [[ -d $HOME/update ]] && rm -rf $HOME/update
-  [[ "$lista_atualizados" != "" ]] && echo -e "${cor[5]} $lista_atualizados ${txt[206]}"
+  [[ "$lista_atualizados" != "" ]] && echo -e "${cor[2]} $lista_atualizados Arquivos Atualizados"
   [[ -e /etc/adm-lite/idioma ]] && rm /etc/adm-lite/idioma
 echo -e "${cor[5]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 }
