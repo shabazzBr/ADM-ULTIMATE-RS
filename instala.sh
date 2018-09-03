@@ -96,7 +96,7 @@ mv -f ./trans /bin/ && chmod 777 /bin/*
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 echo -e "${cor[2]}SELECIONAR IDIOMA\n${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\n${cor[2]}[1]-PT-BR"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -ne " OPÇÃO: "; read 1 lang
+read -p "OPÇÃO: " -e -i 1 lang
 case $lang in
 1)
 id="pt"
