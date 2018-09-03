@@ -115,23 +115,6 @@ echo -e "$barra"
 fun_bar "apt-get install squid3 -y"
 echo -e "$barra"
 echo -e " $(source trans -b pt:${id} "INICIANDO CONFIGURACAO")"
-echo -e "" > /etc/payloads
-#Añadir Host Squid
-payload="/etc/payloads"
-echo -e "" > /etc/payloads
-echo -e " ${txt[219]}"
-echo -e " ${txt[220]}" 
-read -p " $(source trans -b es:${id} "Agregar Host"): " hos
-if [[ $hos != \.* ]]; then
-echo -e "\033[1;31m $(source trans -b es:${id} " [!] Host-Squid debe iniciar con "."")\033[0m"
-echo -e "\033[1;31m $(source trans -b es:${id} " Asegurese de agregarlo despues corretamente!")\033[0m"
-fi
-host="$hos/"
-if [[ -z $host ]]; then
-echo -e "\033[1;31m $(source trans -b es:${id} " [!] Host-Squid no agregado")"
-echo -e "\033[1;31m $(source trans -b es:${id} " Asegurese de agregarlo despues!")\033[0m"
-fi
-echo "$host" >> $payload && grep -v "^$" $payload > /tmp/a && mv /tmp/a $payload
 echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "Agora Escolha Uma Conf Para Seu Proxy")\n$barra"
 echo -e " |1| $(source trans -b pt:${id} "Comum")"
 echo -e " |2| $(source trans -b pt:${id} "Customizado") -\033[1;31m $(source trans -b pt:${id} "Usuario Deve Ajustar")\033[1;37m\n$barra"
@@ -457,10 +440,10 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 		echo "OpenVPN já está instalado"
 		echo ""
 		echo "O que você deseja fazer?"
-		echo "   1) Editar cliente"
-		echo "   2) Remover um usuário"
-		echo "   3) Remover OpenVPN"
-		echo "   0) Voltar"
+		echo -e "${cor[2]} [1] • ${cor[3]}Editar cliente"
+		echo -e "${cor[2]} [2] • ${cor[3]}Remover um usuário"
+		echo -e "${cor[2]} [3] • ${cor[3]}Remover OpenVPN"
+		echo -e "${cor[2]} [0] • ${cor[3]}Voltar"
 		read -p "Selecione a opção [1-4]: " option
 		case $option in
 			1) 
@@ -551,19 +534,18 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 	done
 else
 	clear
-	echo 'Bem vindo ao instalador OpenVPN "@twossh" installer'
+	echo 'Bem vindo ao instalador OpenVPN'
 	echo ""
 	# OpenVPN instalador e criação do primeiro usuario
 	echo "Responda as perguntas para iniciar a instalação"
 	echo "Responda corretamente"
 	echo ""
-	echo "Primeiro precisaremos do ip de sua maquina,este ip está correto ?"
-	echo "listening to."
+	echo -e "${cor[1]}Primeiro precisaremos do ip de sua maquina,este ip está correto ?"
 	read -p "IP address: " -e -i $IP IP
 	echo ""
-	echo "Qual protocolo você deseja para as conexões OPENVPN ?"
-	echo "   1) UDP"
-	echo "   2) TCP (Recomendado)"
+	echo -e "${cor[1]}Qual protocolo você deseja para as conexões OPENVPN ?"
+	echo -e "${cor[2]} [1] • ${cor[3]}UDP"
+	echo -e "${cor[2]} [2] • ${cor[3]}TCP (Recomendado)"
 	read -p "Protocol [1-2]: " -e -i 2 PROTOCOL
 	case $PROTOCOL in
 		1) 
@@ -574,17 +556,17 @@ else
 		;;
 	esac
 	echo ""
-	echo "Qual porta você deseja usar ?"
+	echo -e "${cor[1]}Qual porta você deseja usar ?"
 	read -p "Port: " -e -i 1194 PORT
 	echo ""
-	echo "Qual DNS você deseja usar ?"
-	echo "   1) Sistema(Não Recomendado)"
-	echo "   2) Google (Recomendo como opção 1)"
-	echo "   3) OpenDNS"
-	echo "   4) NTT"
-	echo "   5) Hurricane Electric"
-	echo "   6) Verisign"
-	echo "   7) Cloudflare (Recomendado como opção 2)"
+	echo -e "${cor[1]}Qual DNS você deseja usar ?"
+	echo -e "${cor[2]} [1] • ${cor[3]}Sistema(Não Recomendado)"
+	echo -e "${cor[2]} [2] • ${cor[3]}Google (Recomendo)"
+	echo -e "${cor[2]} [3] • ${cor[3]}OpenDNS"
+	echo -e "${cor[2]} [4] • ${cor[3]}NTT"
+	echo -e "${cor[2]} [5] • ${cor[3]}Hurricane Electric"
+	echo -e "${cor[2]} [6] • ${cor[3]}Verisign"
+	echo -e "${cor[2]} [7] • ${cor[3]}Cloudflare (Recomendado como opção 2)"
 	read -p "DNS [1-7]: " -e -i 2 DNS
 	echo ""
 	echo "Okay, você está pronto para executar o openvpn "
@@ -1202,17 +1184,17 @@ unset ddos
 echo -e "$barra"
 echo -e "${cor[5]} ${txt[335]}"
 echo -e "$barra"
-echo -e "${cor[2]} [1] > ${cor[3]}SQUID $squid"
-echo -e "${cor[2]} [2] > ${cor[3]}DROPBEAR $dropbear"
-echo -e "${cor[2]} [3] > ${cor[3]}OPENVPN $openvpn"
-echo -e "${cor[2]} [4] > ${cor[3]}SSL TUNNEL $stunel"
-echo -e "${cor[2]} [5] > ${cor[3]}SHADOW SOCKS $shadow"
-echo -e "${cor[2]} [6] > ${cor[3]}PROXY SOCKS $socks"
-echo -e "${cor[2]} [7] > ${cor[3]}PROXY GETTUNEL $gettun"
-echo -e "${cor[2]} [8] > ${cor[3]}TCP OVER BYPASS $tcpbypass"
-echo -e "${cor[2]} [9] > ${cor[3]}TELEGRAN MANAGER BOT $telegran"
-echo -e "${cor[2]} [10] > ${cor[3]}WEBMIN $webminn"
-echo -e "${cor[2]} [11] > ${cor[3]}Anti-DDOS $ddos"
+echo -e "${cor[2]} [1] • ${cor[3]}SQUID $squid"
+echo -e "${cor[2]} [2] • ${cor[3]}DROPBEAR $dropbear"
+echo -e "${cor[2]} [3] • ${cor[3]}OPENVPN $openvpn"
+echo -e "${cor[2]} [4] • ${cor[3]}SSL TUNNEL $stunel"
+echo -e "${cor[2]} [5] • ${cor[3]}SHADOW SOCKS $shadow"
+echo -e "${cor[2]} [6] • ${cor[3]}PROXY SOCKS $socks"
+echo -e "${cor[2]} [7] • ${cor[3]}PROXY GETTUNEL $gettun"
+echo -e "${cor[2]} [8] • ${cor[3]}TCP OVER BYPASS $tcpbypass"
+echo -e "${cor[2]} [9] • ${cor[3]}TELEGRAN MANAGER BOT $telegran"
+echo -e "${cor[2]} [10] • ${cor[3]}WEBMIN $webminn"
+echo -e "${cor[2]} [11] • ${cor[3]}Anti-DDOS $ddos"
 echo -e "$barra"
 echo -ne "\033[1;37m ${txt[338]}: "
 read optons
