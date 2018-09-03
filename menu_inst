@@ -3,7 +3,7 @@
 barra="\033[1;34m =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× \033[1;37m"
 _cores="./cores"
 _dr="./idioma"
-[[ "$(echo ${txt[0]})" = "" ]] && source idioma_geral
+[[ "$(echo ADM-MANAGER-ULTIMATE)" = "" ]] && source idioma_geral
 
 #LISTA PORTAS
 mportas () {
@@ -385,7 +385,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 	while :
 	do
 	clear
-		echo "OpenVPN já está instalado"
+		echo -e "${cor[5]}OpenVPN já está instalado"
 		echo ""
 		echo "O que você deseja fazer?"
 		echo -e "${cor[2]} [1] • ${cor[3]}Editar cliente"
@@ -488,12 +488,12 @@ else
 	echo "Responda as perguntas para iniciar a instalação"
 	echo "Responda corretamente"
 	echo ""
-	echo -e "${cor[1]}Primeiro precisaremos do ip de sua maquina,este ip está correto ?"
+	echo -e "${cor[4]}Primeiro precisaremos do ip de sua maquina,este ip está correto ${cor[0]}?"
 	read -p "IP address: " -e -i $IP IP
 	echo ""
-	echo -e "${cor[1]}Qual protocolo você deseja para as conexões OPENVPN ?"
+	echo -e "${cor[5]}Qual protocolo você deseja para as conexões OPENVPN ?"
 	echo -e "${cor[2]} [1] • ${cor[3]}UDP"
-	echo -e "${cor[2]} [2] • ${cor[3]}TCP (Recomendado)"
+	echo -e "${cor[2]} [2] • ${cor[3]}TCP (Recomendado)${cor[0]}"
 	read -p "Protocol [1-2]: " -e -i 2 PROTOCOL
 	case $PROTOCOL in
 		1) 
@@ -504,20 +504,20 @@ else
 		;;
 	esac
 	echo ""
-	echo -e "${cor[1]}Qual porta você deseja usar ?"
+	echo -e "${cor[4]}Qual porta você deseja usar ${cor[0]}?"
 	read -p "Port: " -e -i 1194 PORT
 	echo ""
-	echo -e "${cor[1]}Qual DNS você deseja usar ?"
+	echo -e "${cor[5]}Qual DNS você deseja usar ?"
 	echo -e "${cor[2]} [1] • ${cor[3]}Sistema(Não Recomendado)"
 	echo -e "${cor[2]} [2] • ${cor[3]}Google (Recomendo)"
 	echo -e "${cor[2]} [3] • ${cor[3]}OpenDNS"
 	echo -e "${cor[2]} [4] • ${cor[3]}NTT"
 	echo -e "${cor[2]} [5] • ${cor[3]}Hurricane Electric"
 	echo -e "${cor[2]} [6] • ${cor[3]}Verisign"
-	echo -e "${cor[2]} [7] • ${cor[3]}Cloudflare (Recomendado como opção 2)"
+	echo -e "${cor[2]} [7] • ${cor[3]}Cloudflare (Recomendado como opção 2)${cor[0]}"
 	read -p "DNS [1-7]: " -e -i 2 DNS
 	echo ""
-	echo "Okay, você está pronto para executar o openvpn "
+	echo -e "${cor[5]}Okay, você está pronto para executar o openvpn ${cor[0]}"
 	read -n1 -r -p "Pressione uma tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
 		apt-get upgrade
@@ -1130,7 +1130,7 @@ unset ddos
 [[ -e /etc/webmin/miniserv.conf ]] && webminn="\033[1;32m$(source trans -b pt:${id} "Online")"
 [[ -e /usr/local/ddos/ddos.conf ]] && ddos="\033[1;32m$(source trans -b pt:${id} "Online")"
 echo -e "$barra"
-echo -e "${cor[5]} ${txt[335]}"
+echo -e "${cor[5]} MENU DE INSTALAÇÕES"
 echo -e "$barra"
 echo -e "${cor[2]} [1] • ${cor[3]}SQUID $squid"
 echo -e "${cor[2]} [2] • ${cor[3]}DROPBEAR $dropbear"
@@ -1144,7 +1144,7 @@ echo -e "${cor[2]} [9] • ${cor[3]}TELEGRAN MANAGER BOT $telegran"
 echo -e "${cor[2]} [10] • ${cor[3]}WEBMIN $webminn"
 echo -e "${cor[2]} [11] • ${cor[3]}Anti-DDOS $ddos"
 echo -e "$barra"
-echo -ne "\033[1;37m ${txt[338]}: "
+echo -ne "\033[1;37m Selecione uma opção: "
 read optons
 case $optons in
 1)
