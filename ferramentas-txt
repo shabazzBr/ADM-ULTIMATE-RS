@@ -1,7 +1,7 @@
 #!/bin/bash
 source cabecalho
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-echo -e "${cor[2]}${cor[5]}MENU FERRAMENTAS"
+echo -e "${cor[2]}${cor[5]} MENU FERRAMENTAS"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 echo -e "${cor[2]} [0] •${cor[4]} [ VOLTAR / SAIR ]"
 echo -e "${cor[2]} [1] •${cor[3]} CRIAR BACKUP"
