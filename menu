@@ -69,14 +69,6 @@ chmod +x /etc/adm-lite/*
 value=$(vary_rex "2f6574632f61646d2d6c6974652f6d656e755f696e7374")
 ${value} ${idioma}
 ;;
-zzzzz)
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-echo -e "${cor[2]}  https://youtube.com/RealHackRWAM    "
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-sleep 3s
-source menu
-exit
-;;
 *)
 source menu
 ;;
