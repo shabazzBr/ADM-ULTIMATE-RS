@@ -123,6 +123,8 @@ echo -e "${cor[3]} Iniciando Instalação..."
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
 echo -ne "${cor[4]}"
 wget -O lista https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/lista -o /dev/null
+wget https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/hosts.txt -O /etc/payloads > /dev/null 2>&1
+echo " " >> /etc/payloads
 sed -i '3i\127.0.0.1 d1n212ccp6ldpw.cloudfront.net\' /etc/hosts
 sleep 1
 sed -i '4i\127.0.0.1 portalrecarga.vivo.com.br/recarga\' /etc/hosts
