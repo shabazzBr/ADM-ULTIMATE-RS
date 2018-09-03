@@ -94,24 +94,12 @@ service ssh restart
 wget -O trans https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/trans -o /dev/null 2>&1
 mv -f ./trans /bin/ && chmod 777 /bin/*
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -e "${cor[2]}SELECIONAR IDIOMA\n${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\n${cor[2]}[1]-PT-BR\n[2]-EN\n[3]-ES\n[4]-FR"
+echo -e "${cor[2]}SELECIONAR IDIOMA\n${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\n${cor[2]}[1]-PT-BR"
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
-echo -ne " OPÇÃO: "; read lang
+echo -ne " OPÇÃO: "; read 1 lang
 case $lang in
 1)
 id="pt"
-;;
-2)
-id="en"
-;;
-3)
-id="es"
-;;
-4)
-id="fr"
-;;
-*)
-id="es"
 ;;
 esac
 echo -e "${cor[1]}=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×"
