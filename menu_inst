@@ -581,7 +581,7 @@ else
 		;;
 	esac
     echo -e "$barra"
-	echo -e "${cor[5]} Qual porta você deseja usar ?"
+	echo -e "${cor[5]} Qual porta você deseja usar ?${cor[3]}"
 	read -p "Port: " -e -i 1194 PORT
     echo -e "$barra"
 	echo -e "${cor[5]} Qual DNS você deseja usar ?"
@@ -594,8 +594,6 @@ else
 	echo -e "${cor[2]} [7] • ${cor[3]}Cloudflare (Recomendado como opção 2)${cor[3]}"
 	read -p "DNS [1-7]: " -e -i 2 DNS
     echo -e "$barra"
-	echo -e "${cor[2]} Okay, você está pronto para executar o openvpn ${cor[0]}"
-	read -n1 -r -p "Pressione uma tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
 	    echo -e "$barra"
 		echo -e "${cor[2]}ATUALIZANDO O SISTEMA"
@@ -779,7 +777,7 @@ exit 0' > $RCLOCAL
 	EXTERNALIP=$(wget -4qO- "http://whatismyip.akamai.com/")
 	if [[ "$IP" != "$EXTERNALIP" ]]; then
 		echo -e "$barra"
-		echo -e "${cor[3]} Parece que seu Servidor está atrás de um NAT"
+		echo -e "${cor[2]} Parece que seu Servidor está atrás de um NAT"
 		echo -e "${cor[5]} Por favor, informe o seu ip externo"
 		echo -e "${cor[5]} Caso não seja prossiga com Enter"
 		read -p "External IP: " -e USEREXTERNALIP
