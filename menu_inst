@@ -29,16 +29,16 @@ fun_eth () {
 eth=$(ifconfig | grep -v inet6 | grep -v lo | grep -v 127.0.0.1 | grep "encap:Ethernet" | awk '{print $1}')
     [[ $eth != "" ]] && {
     echo -e "$barra"
-    echo -e "${cor[3]} $(source trans -b pt:${id} "Aplicar Sistema Para Melhorar Pacotes Ssh?")"
-    echo -e "${cor[3]} $(source trans -b pt:${id} "Opcao Para Usuarios Avancados")"
+    echo -e "${cor[3]} Aplicar Sistema Para Melhorar Pacotes Ssh?"
+    echo -e "${cor[3]} Opcao Para Usuarios Avancados"
     echo -e "$barra"
     read -p " [S/N]: " -e -i n sshsn
            [[ "$sshsn" = @(s|S|y|Y) ]] && {
-           echo -e "${cor[1]} $(source trans -b pt:${id} "Correcao de problemas de pacotes no SSH...")"
-           echo -e " $(source trans -b pt:${id} "Qual A Taxa RX")"
+           echo -e "${cor[1]} Correcao de problemas de pacotes no SSH..."
+           echo -e " Qual A Taxa RX"
            echo -ne "[ 1 - 999999999 ]: "; read rx
            [[ "$rx" = "" ]] && rx="999999999"
-           echo -e " $(source trans -b pt:${id} "Qual A Taxa TX")"
+           echo -e " Qual A Taxa TX"
            echo -ne "[ 1 - 999999999 ]: "; read tx
            [[ "$tx" = "" ]] && tx="999999999"
            apt-get install ethtool -y > /dev/null 2>&1
@@ -82,42 +82,42 @@ fun_squid  () {
   var_squid="/etc/squid3/squid.conf"
   fi
   [[ -e $var_squid ]] && {
-  echo -e "$barra\n\033[1;32m $(source trans -b es:${id} "REMOVENDO SQUID")\n$barra"
+  echo -e "$barra\n\033[1;32m REMOVENDO SQUID\n$barra"
   fun_bar "apt-get remove squid3 -y"
   service squid stop > /dev/null 2>&1
-  echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "Procedimento Concluido")\n$barra"
+  echo -e "$barra\n\033[1;32m Procedimento Concluido\n$barra"
   [[ -e $var_squid ]] && rm $var_squid
   return 0
   }
-echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "INSTALADOR SQUID ADM-ULTIMATE")\n$barra"
+echo -e "$barra\n\033[1;32m INSTALADOR SQUID\n$barra"
 fun_ip
-echo -ne " $(source trans -b pt:${id} "Confirme seu ip")"; read -p ": " -e -i $IP ip
-echo -e "$barra\n $(source trans -b pt:${id} "Agora Escolha as Portas que Deseja No Squid")"
-echo -e " $(source trans -b pt:${id} "Escolha As Portas Em Ordem Sequencial Exemplo: 80 8080 8799")"
-echo -ne " $(source trans -b pt:${id} "Digite as Portas:") "; read portasx
+echo -ne " Confirme seu ip"; read -p ": " -e -i $IP ip
+echo -e "$barra\n Agora Escolha as Portas que Deseja No Squid"
+echo -e " Escolha As Portas Em Ordem Sequencial Exemplo: 80 8080 8799"
+echo -ne " Digite as Portas: "; read portasx
 totalporta=($portasx)
 unset PORT
    for((i=0; i<${#totalporta[@]}; i++)); do
         [[ $(mportas|grep "${totalporta[$i]}") = "" ]] && {
-        echo -e "\033[1;33m $(source trans -b pt:${id} "Porta Escolhida:")\033[1;32m ${totalporta[$i]} OK"
+        echo -e "\033[1;33m Porta Escolhida:\033[1;32m ${totalporta[$i]} OK"
         PORT+="${totalporta[$i]}\n"
         } || {
-        echo -e "\033[1;33m $(source trans -b pt:${id} "Porta Escolhida:")\033[1;31m ${totalporta[$i]} FAIL"
+        echo -e "\033[1;33m Porta Escolhida:\033[1;31m ${totalporta[$i]} FAIL"
         }
    done
   [[ "$(echo -e $PORT)" = "" ]] && {
-  echo -e "\033[1;31m $(source trans -b pt:${id} "Nenhuma Porta Valida Foi Escolhida")\033[0m"
+  echo -e "\033[1;31m Nenhuma Porta Valida Foi Escolhida\033[0m"
   return 1
   }
 echo -e "$barra"
-echo -e " $(source trans -b pt:${id} "INSTALANDO SQUID")"
+echo -e " INSTALANDO SQUID"
 echo -e "$barra"
 fun_bar "apt-get install squid3 -y"
 echo -e "$barra"
-echo -e " $(source trans -b pt:${id} "INICIANDO CONFIGURACAO")"
-echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "Agora Escolha Uma Conf Para Seu Proxy")\n$barra"
-echo -e " |1| $(source trans -b pt:${id} "Comum")"
-echo -e " |2| $(source trans -b pt:${id} "Customizado") -\033[1;31m $(source trans -b pt:${id} "Usuario Deve Ajustar")\033[1;37m\n$barra"
+echo -e " INICIANDO CONFIGURACAO"
+echo -e "$barra\n\033[1;32m Agora Escolha Uma Conf Para Seu Proxy\n$barra"
+echo -e " |1| Comum"
+echo -e " |2| Customizado -\033[1;31m "Usuario Deve Ajustar\033[1;37m\n$barra"
 read -p " [1/2]: " -e -i 1 proxy_opt
 unset var_squid
 if [[ -d /etc/squid ]]; then
@@ -237,12 +237,12 @@ forwarded_for off
 pipeline_prefetch off" >> $var_squid
 fi
 fun_eth
-echo -e "$barra\n \033[1;31m [ ! ] \033[1;33m$(source trans -b pt:${id} "REINICIANDO SERVICOS")"
+echo -e "$barra\n \033[1;31m [ ! ] \033[1;33mREINICIANDO SERVICOS"
 squid3 -k reconfigure > /dev/null 2>&1
 service ssh restart > /dev/null 2>&1
 service squid3 restart > /dev/null 2>&1
 echo -e " \033[1;32m[OK]"
-echo -e "$barra\n ${cor[3]}$(source trans -b pt:${id} "SQUID CONFIGURADO")\n$barra"
+echo -e "$barra\n ${cor[3]}SQUID CONFIGURADO\n$barra"
 #UFW
 for ufww in $(mportas|awk '{print $2}'); do
 ufw allow $ufww > /dev/null 2>&1
@@ -251,19 +251,19 @@ done
 
 fun_dropbear () {
  [[ -e /etc/default/dropbear ]] && {
- echo -e "$barra\n\033[1;32m $(source trans -b es:${id} "REMOVENDO DROPBEAR")\n$barra"
+ echo -e "$barra\n\033[1;32m REMOVENDO DROPBEAR\n$barra"
  fun_bar "apt-get remove dropbear -y"
- echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "Dropbear Removido")\n$barra"
+ echo -e "$barra\n\033[1;32m Dropbear Removido\n$barra"
  [[ -e /etc/default/dropbear ]] && rm /etc/default/dropbear
  user -k 443/tcp > /dev/null 2>&1
  return 0
  }
-echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "INSTALADOR DROPBEAR")\n$barra"
-echo -e " $(source trans -b es:${id} "DROPBEAR USARÁ A PORTA 443")\033[1;37m"
+echo -e "$barra\n\033[1;32m INSTALADOR DROPBEAR\n$barra"
+echo -e " DROPBEAR USARÁ A PORTA 443\033[1;37m"
 echo -e "$barra"
    [[ $(mportas|grep 443) != "" ]] && {
-   echo -e "\033[1;31m $(source trans -b pt:${id} "PORTA 443 EM USO")\033[1;37m"
-   echo -e "\033[1;31m $(source trans -b es:${id} "TENTE NOVAMENTE")\033[1;37m"
+   echo -e "\033[1;31m PORTA 443 EM USO\033[1;37m"
+   echo -e "\033[1;31m TENTE NOVAMENTE\033[1;37m"
    fuser -k 443/tcp > /dev/null 2>&1
    echo -e "$barra"
    return 1
@@ -272,23 +272,23 @@ sysvar=$(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/     
 shells=$(cat /etc/shells|grep "/bin/false")
 [[ ! ${shells} ]] && echo -e "/bin/false" >> /etc/shells
 [[ "$sysvar" != "" ]] && {
-echo -e "${cor[2]} $(source trans -b pt:${id} "Instalando dropbear")"
+echo -e "${cor[2]} Instalando dropbear"
 echo -e "$barra"
 fun_bar "apt-get install dropbear -y"
 echo -e "$barra"
 touch /etc/dropbear/banner
-echo -e "${cor[2]} $(source trans -b pt:${id} "Configurando dropbear")"
+echo -e "${cor[2]} Configurando dropbear"
 echo -e "NO_START=0" > /etc/default/dropbear
 echo -e 'DROPBEAR_EXTRA_ARGS="-p 443"' >> /etc/default/dropbear
 echo -e 'DROPBEAR_BANNER="/etc/dropbear/banner"' >> /etc/default/dropbear
 echo -e "DROPBEAR_RECEIVE_WINDOW=65536" >> /etc/default/dropbear
 } || {
-echo -e "${cor[2]} $(source trans -b pt:${id} "Instalando dropbear")"
+echo -e "${cor[2]} Instalando dropbear"
 echo -e "$barra"
 fun_bar "apt-get install dropbear -y"
 touch /etc/dropbear/banner
 echo -e "$barra"
-echo -e "${cor[2]} $(source trans -b pt:${id} "Configurando dropbear")"
+echo -e "${cor[2]} Configurando dropbear"
 echo -e "NO_START=0" > /etc/default/dropbear
 echo -e 'DROPBEAR_EXTRA_ARGS="-p 443"' >> /etc/default/dropbear
 echo -e 'DROPBEAR_BANNER="/etc/dropbear/banner"' >> /etc/default/dropbear
@@ -297,7 +297,7 @@ echo -e "DROPBEAR_RECEIVE_WINDOW=65536" >> /etc/default/dropbear
 fun_eth
 service ssh restart > /dev/null 2>&1
 service dropbear restart > /dev/null 2>&1
-echo -e "$barra\n${cor[3]} $(source trans -b pt:${id} "Seu dropbear foi configurado com sucesso")\n$barra"
+echo -e "$barra\n${cor[3]} Seu dropbear foi configurado com sucesso\n$barra"
 #UFW
 for ufww in $(mportas|awk '{print $2}'); do
 ufw allow $ufww > /dev/null 2>&1
@@ -385,8 +385,9 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 	while :
 	do
 	clear
-		echo -e "${cor[5]}OpenVPN já está instalado"
-		echo ""
+		echo -e "$barra"
+		echo -e "${cor[5]} MENU OpenVPN"
+		echo -e "$barra"
 		echo "O que você deseja fazer?"
 		echo -e "${cor[2]} [1] • ${cor[3]}Editar cliente"
 		echo -e "${cor[2]} [2] • ${cor[3]}Remover um usuário"
@@ -407,7 +408,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				echo "Você não tem usuarios existentes!"
 				exit 6
 			fi
-			echo ""
+			echo -e "$barra"
 			echo "Selecione um usuario para remover"
 			tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
 			if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
@@ -426,12 +427,12 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 			# CRL is read with each client connection, when OpenVPN is dropped to nobody
 			chown nobody:$GROUPNAME /etc/openvpn/crl.pem
-			echo ""
+			echo -e "$barra"
 			echo "Usuario removido"
 			sleep 1
 			menu;;
 			3) 
-			echo ""
+			echo -e "$barra"
 			read -p "Você deseja remover OpenVPN? [s/n]: " -e -i n REMOVE
 			if [[ "$REMOVE" = 's|S' ]]; then
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -468,10 +469,10 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				fi
 				rm -rf /etc/openvpn
 				rm -rf /usr/share/doc/openvpn*
-				echo ""
+				echo -e "$barra"
 				echo "OpenVPN removido!"
 			else
-				echo ""
+				echo -e "$barra"
 				echo "Remoção abordada!"
 			fi
 			sleep 1
@@ -482,16 +483,16 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 	done
 else
 	clear
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[4]} Bem vindo ao instalador OpenVPN"
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	# OpenVPN instalador e criação do primeiro usuario
 	echo -e "${cor[5]} Responda as perguntas para iniciar a instalação"
 	echo -e "${cor[5]} Responda corretamente"
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[5]} Primeiro precisaremos do ip de sua maquina,este ip está correto ${cor[0]}?"
 	read -p "IP address: " -e -i $IP IP
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[5]}Qual protocolo você deseja para as conexões OPENVPN ?"
 	echo -e "${cor[2]} [1] • ${cor[3]}UDP"
 	echo -e "${cor[2]} [2] • ${cor[3]}TCP (Recomendado)${cor[0]}"
@@ -504,12 +505,12 @@ else
 		PROTOCOL=tcp
 		;;
 	esac
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[5]} Qual porta você deseja usar ${cor[0]}?"
 	read -p "Port: " -e -i 1194 PORT
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[4]} Qual DNS você deseja usar ?"
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[2]} [1] • ${cor[3]}Sistema(Não Recomendado)"
 	echo -e "${cor[2]} [2] • ${cor[3]}Google (Recomendo)"
 	echo -e "${cor[2]} [3] • ${cor[3]}OpenDNS"
@@ -518,7 +519,7 @@ else
 	echo -e "${cor[2]} [6] • ${cor[3]}Verisign"
 	echo -e "${cor[2]} [7] • ${cor[3]}Cloudflare (Recomendado como opção 2)${cor[0]}"
 	read -p "DNS [1-7]: " -e -i 2 DNS
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[5]} Okay, você está pronto para executar o openvpn ${cor[0]}"
 	read -n1 -r -p "Pressione uma tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
@@ -716,10 +717,10 @@ verb 3
 float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "OPENVPN"
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 	echo -e "${cor[5]} Concluido!"
 	echo -e "${cor[5]} Seu arquivo está disponivel em" ~/"OPENVPN.ovpn"
-	echo -e "${cor[1]} =================================== ${cor[0]}"
+    echo -e "$barra"
 fi
 return 0
 }
@@ -728,12 +729,12 @@ return 0
 fun_shadowsocks () {
 [[ -e /etc/shadowsocks.json ]] && {
 [[ $(ps x|grep ssserver|grep -v grep|awk '{print $1}') != "" ]] && kill -9 $(ps x|grep ssserver|grep -v grep|awk '{print $1}') > /dev/null 2>&1 && ssserver -c /etc/shadowsocks.json -d stop > /dev/null 2>&1
-echo -e "${barra}\n\033[1;33m $(source trans -b pt:${id} "SHADOWSOCKS PARADO")\n${barra}${cor[0]}"
+echo -e "${barra}\n\033[1;33m SHADOWSOCKS PARADO\n${barra}${cor[0]}"
 rm /etc/shadowsocks.json
 return 0
 }
        while true; do
-       echo -e "${barra}\n\033[1;33m $(source trans -b pt:${id} "Selecione uma Criptografia")\n${barra}${cor[0]}"
+       echo -e "${barra}\n\033[1;33m Selecione uma Criptografia\n${barra}${cor[0]}"
        encript=(aes-256-gcm aes-192-gcm aes-128-gcm aes-256-ctr aes-192-ctr aes-128-ctr aes-256-cfb aes-192-cfb aes-128-cfb camellia-128-cfb camellia-192-cfb camellia-256-cfb chacha20-ietf-poly1305 chacha20-ietf chacha20 rc4-md5)
        for((s=0; s<${#encript[@]}; s++)); do
        echo -e " [${s}] - ${encript[${s}]}"
@@ -741,27 +742,27 @@ return 0
        echo -e "$barra"
        while true; do
        unset cript
-       echo -ne "$(source trans -b pt:${id} "Escolha uma Opcao"): "; read cript
+       echo -ne "Escolha uma Opcao: "; read cript
        [[ ${encript[$cript]} ]] && break
-       echo -e "$(source trans -b pt:${id} "Opcao Invalida")"
+       echo -e "Opcao Invalida"
        done
        echo -e "$barra"
        encriptacao="${encript[$cript]}"
        [[ ${encriptacao} != "" ]] && break
-       echo -e "$(source trans -b pt:${id} "Opcao Invalida")"
+       echo -e "Opcao Invalida"
       done
 #ESCOLHENDO LISTEN
-      echo -e "${barra}\n\033[1;33m $(source trans -b pt:${id} "Selecione Uma Porta Para o Shadowsocks Escutar")\n${barra}${cor[0]}"
+      echo -e "${barra}\n\033[1;33m Selecione Uma Porta Para o Shadowsocks Escutar\n${barra}${cor[0]}"
       while true; do
       unset Lport
       read -p " Listen Port: " Lport
       [[ $(mportas|grep "$Lport") = "" ]] && break
-      echo -e " ${Lport}: $(source trans -b pt:${id} "Porta Invalida")"      
+      echo -e " ${Lport}: Porta Invalida"      
       done
 #INICIANDO
-echo -e "${barra}\n\033[1;33m $(source trans -b pt:${id} "Digite a Senha Shadowsocks")${cor[0]}"
+echo -e "${barra}\n\033[1;33m Digite a Senha Shadowsocks${cor[0]}"
 read -p" Pass: " Pass
-echo -e "${barra}\n\033[1;33m $(source trans -b pt:${id} "Instalando")\n${barra}${cor[0]}"
+echo -e "${barra}\n\033[1;33m Instalando\n${barra}${cor[0]}"
 fun_bar 'apt-get install python-pip python-m2crypto -y'
 fun_bar 'pip install --upgrade pip'
 fun_bar 'pip install shadowsocks'
@@ -790,15 +791,15 @@ read -p " BOT LINGUAGE [pt/es/en/fr]: " lang
 echo -e "${barra}"
 echo -e "${loguin}:${pass}" > ./bottokens
 screen -dmS screen bash ./ultimatebot "$tokenxx" "$lang" > /dev/null 2>&1
-echo -e " LOADING BOT, WAIT"
-sleep 10s
-echo -e " RUNNING"
+echo -e " CARREGANDO BOT, AGUARDE"
+sleep 5s
+echo -e " LIGADO"
 echo -e "${barra}"
 else
 kill -9 $(ps x | grep "ultimatebot" | grep -v "grep" | awk '{print $1}') > /dev/null 2>&1
 [[ -e ./bottokens ]] && rm ./bottokens
 echo -e "${barra}"
-echo -e " BOT STOPED"
+echo -e " BOT PARADO"
 echo -e "${barra}"
 fi
 return 0
@@ -806,27 +807,27 @@ return 0
 
 web_min () {
  [[ -e /etc/webmin/miniserv.conf ]] && {
- echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "REMOVENDO WEBMIN")\n$barra"
+ echo -e "$barra\n\033[1;32m REMOVENDO WEBMIN\n$barra"
  fun_bar "apt-get remove webmin -y"
- echo -e "$barra\n\033[1;32m $(source trans -b pt:${id} "Webmin Removido")\n$barra"
+ echo -e "$barra\n\033[1;32m Webmin Removido\n$barra"
  [[ -e /etc/webmin/miniserv.conf ]] && rm /etc/webmin/miniserv.conf
  return 0
  }
-echo -e " \033[1;36mInstalling Webmin, aguarde:"
+echo -e " \033[1;36mInstalando Webmin, aguarde:"
 fun_bar "wget https://sourceforge.net/projects/webadmin/files/webmin/1.881/webmin_1.881_all.deb"
 fun_bar "dpkg --install webmin_1.881_all.deb"
 fun_bar "apt-get -y -f install"
 rm /root/webmin_1.881_all.deb > /dev/null 2>&1
 service webmin restart > /dev/null 2>&1 
-echo -e "${barra}\n $(source trans -b pt:${id} "Acesse via web usando o endereço: https;//ip_da_vps:10000")\n${barra}"
-echo -e "$(source trans -b pt:${id} "Procedimento Concluido")\n${barra}"
+echo -e "${barra}\n Acesse via web usando o endereço: https;//ip_da_vps:10000\n${barra}"
+echo -e "Procedimento Concluido\n${barra}"
 return 0
 }
 
 iniciarsocks () {
 pstop () {
 [[ -e /etc/adm-lite/sockson ]] && {
-echo -e "${barra}\n $(source trans -b pt:${id} "Parando Socks Python")\n${barra}"
+echo -e "${barra}\n Parando Socks Python\n${barra}"
 pidproxy=$(ps x | grep "proxypub.py" | grep -v "grep" | awk -F "pts" '{print $1}')
 fun_bar "kill -9 $pidproxy"
 pidproxy2=$(ps x | grep "proxypriv.py" | grep -v "grep" | awk -F "pts" '{print $1}')
@@ -835,7 +836,7 @@ pidproxy3=$(ps x | grep "proxydirect.py" | grep -v "grep" | awk -F "pts" '{print
 fun_bar "kill -9 $pidproxy3"
 pidproxy4=$(ps x | grep "openproxy.py" | grep -v "grep" | awk -F "pts" '{print $1}')
 fun_bar "kill -9 $pidproxy4"
-echo -e "${barra}\n $(source trans -b pt:${id} "Socks Parado")\n${barra}"
+echo -e "${barra}\n Socks Parado\n${barra}"
 rm /etc/adm-lite/sockson
 [[ -e /etc/adm-lite/sockpub ]] && rm /etc/adm-lite/sockpub
 [[ -e /etc/adm-lite/sockpriv ]] && rm /etc/adm-lite/sockpriv
@@ -849,18 +850,18 @@ socksinstal () {
 }
 
 pconfig () {
-echo -e "${barra}\n $(source trans -b pt:${id} "Escolha a Porta em que o Socks Vai Escutar")\n${barra}"
+echo -e "${barra}\n Escolha a Porta em que o Socks Vai Escutar\n${barra}"
 while true; do
 unset porta_socket
 echo -ne "\033[1;37m"
 	 read -p " Local-Port: " porta_socket
 	 if [[ ! -z $porta_socket ]]; then
 		 if [[ $(echo $porta_socket|grep [0-9]) ]]; then
-			[[ $(mportas|grep $porta_socket) = "" ]] && break || echo -e "\033[1;31m $(source trans -b pt:${id} "Porta Invalida")"
+			[[ $(mportas|grep $porta_socket) = "" ]] && break || echo -e "\033[1;31m Porta Invalida"
 		 fi
 	 fi
 done
-echo -e "${barra}\n $(source trans -b pt:${id} "Escolha o Texto de Conexao")\n${barra}"
+echo -e "${barra}\n Escolha o Texto de Conexao\n${barra}"
 read -p " Text Socket: " -e -i ADMULTIMATE texto_soket
 }
 IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
@@ -869,9 +870,9 @@ IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,
 [[ -e /etc/adm-lite/sockdirect ]] && _sockdirect="\033[1;32mOn" || _sockdirect="\033[1;31mOff"
 [[ -e /etc/adm-lite/sockopen ]] && _sockopen="\033[1;32mOn" || _sockopen="\033[1;31mOff"
 echo -e "${barra}"
-echo -e "${cor[2]} [1] •${cor[3]}Socks Python SIMPLE ${_sockpub}"
-echo -e "${cor[2]} [2] •${cor[3]}Socks Python SEGURO ${_sockpriv}"
-echo -e "${cor[2]} [3] •${cor[3]}Socks Python DIRECTO ${_sockdirect}"
+echo -e "${cor[2]} [1] •${cor[3]}Socks Python PÚBLICO ${_sockpub}"
+echo -e "${cor[2]} [2] •${cor[3]}Socks Python PRIVADO ${_sockpriv}"
+echo -e "${cor[2]} [3] •${cor[3]}Socks Python DIRETO ${_sockdirect}"
 echo -e "${cor[2]} [4] •${cor[3]}Socks Python OPENVPN ${_sockopen}"
 echo -e "${cor[2]} [5] •${cor[3]}Parar Socks Python \n${barra}"
 while true; do
@@ -905,7 +906,7 @@ read -p " Option: " portproxy
 	return 0
     esac
 done
-echo -e "${barra}\n $(source trans -b pt:${id} "Procedimento Concluido")\n${barra}"
+echo -e "${barra}\n Procedimento Concluido\n${barra}"
 return 0
 }
 
@@ -919,18 +920,18 @@ fun_bar "kill -9 $pids"
 done
 fi
 rm /etc/adm-lite/gettun
-echo -e "${barra}\n Gettunel $(source trans -b es:${id} "desativado")\n${barra}"
+echo -e "${barra}\n Gettunel desativado\n${barra}"
 return 0
 }
 echo -e "${barra}\n GETTUNEL PROXY\n${barra}"
-echo -e "${cor[3]} $(source trans -b pt:${id} "Escolha Uma Porta onde Gettunel vai Escutar")"
+echo -e "${cor[3]} Escolha Uma Porta onde Gettunel vai Escutar"
 while true; do
 unset portas
 echo -ne "\033[1;37m"
 	 read -p " Local-Port: " portas
 	 if [[ ! -z $portas ]]; then
 		 if [[ $(echo $portas|grep [0-9]) ]]; then
-		[[ $(mportas|grep $portas) = "" ]] && break || echo -e " $(source trans -b pt:${id} "Porta Invalida")"
+		[[ $(mportas|grep $portas) = "" ]] && break || echo -e "Porta Invalida"
 		fi
 	fi
 done
@@ -939,30 +940,30 @@ screen -dmS screen python ./get.py
 sleep 1s
 rm ./get.py
  [[ "$(ps x | grep get.py | grep -v grep | awk '{print $1}')" != "" ]] && {
- echo -e "${barra}\n Gettunel $(source trans -b pt:${id} "Iniciado com Sucesso")\n${barra} "
+ echo -e "${barra}\n Gettunel Iniciado com Sucesso\n${barra} "
  echo -e " Sua senha é:"
  echo -e "${cor[3]} Pass:\033[1;32m ADMMANAGER"
  echo -e "$barra"
  touch /etc/adm-lite/gettun
  } || {
-echo -e "$barra\n Gettunel$(source trans -b pt:${id} "nao foi iniciado")\n$barra"
+echo -e "$barra\n Gettunel nao foi iniciado\n$barra"
  }
 }
 
 tcpbypass_fun () {
 [[ -e /etc/adm-lite/edbypass ]] && {
-echo -e "$barra\n $(source trans -b pt:${id} "Parando Tcp Bypass")\n$barra"
+echo -e "$barra\n Parando Tcp Bypass\n$barra"
 pid=$(ps x | grep "scktcheck" | grep -v grep | awk '{print $1}')
 if [ "$pid" != "" ]; then
 for pids in $(echo $pid); do
 fun_bar "kill -9 $pids"
 done
 fi
-echo -e "$barra\n $(source trans -b pt:${id} "Parado com Sucesso")\n$barra"
+echo -e "$barra\n Parado com Sucesso\n$barra"
 rm /etc/adm-lite/edbypass
 return 0
 }
-echo -e "$barra\n $(source trans -b pt:${id} "TCP Bypass ADM")\n$barra"
+echo -e "$barra\n TCP Bypass ADM\n$barra"
 chmod +x ./overtcp
 ./overtcp || { 
 echo -e "$barra"
@@ -970,50 +971,50 @@ return 1
 }
 touch /etc/adm-lite/edbypass
 tput cuu1 && tput dl1
-echo -e "$barra\n $(source trans -b pt:${id} "Procedimento Concluido")\n$barra"
+echo -e "$barra\n Procedimento Concluido\n$barra"
 return 0
 }
 
 ssl_stunel () {
 [[ $(mportas|grep stunnel4|head -1) ]] && {
 echo -e "$barra"
-echo -e "\033[1;33m $(source trans -b pt:${id} "Parando Stunnel")"
+echo -e "\033[1;33m Parando Stunnel"
 echo -e "$barra"
 fun_bar "apt-get purge stunnel4 -y"
 echo -e "$barra"
-echo -e "\033[1;33m $(source trans -b pt:${id} "Parado Com Sucesso!")"
+echo -e "\033[1;33m Parado Com Sucesso!"
 echo -e "$barra"
 return 0
 }
 echo -e "$barra"
-echo -e "\033[1;36m $(source trans -b pt:${id} "SSL Stunnel")"
+echo -e "\033[1;36m SSL Stunnel"
 echo -e "$barra"
-echo -e "\033[1;33m $(source trans -b pt:${id} "Selecione Uma Porta De Redirecionamento Interna")"
-echo -e "\033[1;33m $(source trans -b pt:${id} "Ou seja, uma Porta no Seu Servidor Para o SSL")"
+echo -e "\033[1;33m Selecione Uma Porta De Redirecionamento Interna"
+echo -e "\033[1;33m Ou seja, uma Porta no Seu Servidor Para o SSL"
 echo -e "$barra"
          while true; do
          echo -ne "\033[1;37m"
          read -p " Local-Port: " portx
          if [[ ! -z $portx ]]; then
              if [[ $(echo $portx|grep [0-9]) ]]; then
-                [[ $(mportas|grep $portx|head -1) ]] && break || echo -e "\033[1;31m $(source trans -b pt:${id} "Porta Invalida")"
+                [[ $(mportas|grep $portx|head -1) ]] && break || echo -e "\033[1;31m Porta Invalida"
              fi
          fi
          done
 echo -e "$barra"
 DPORT="$(mportas|grep $portx|awk '{print $2}'|head -1)"
-echo -e "\033[1;33m $(source trans -b pt:${id} "Agora Precisamos Saber Qual Porta o SSL, Vai Escutar")"
+echo -e "\033[1;33m Agora Precisamos Saber Qual Porta o SSL, Vai Escutar"
 echo -e "$barra"
     while true; do
     read -p " Listen-SSL: " SSLPORT
     [[ $(mportas|grep $SSLPORT) ]] || break
-    echo -e "\033[1;33m $(source trans -b es:${id} "A porta selecionada ja está em uso")"
+    echo -e "\033[1;33m A porta selecionada ja está em uso"
     unset SSLPORT
 	echo -e "$barra"
 	return 0
     done
 echo -e "$barra"
-echo -e "\033[1;33m $(source trans -b pt:${id} "Instalando SSL")"
+echo -e "\033[1;33m Instalando SSL"
 echo -e "$barra"
 fun_bar "apt-get install stunnel4 -y"
 echo -e "cert = /etc/stunnel/stunnel.pem\nclient = no\nsocket = a:SO_REUSEADDR=1\nsocket = l:TCP_NODELAY=1\nsocket = r:TCP_NODELAY=1\n\n[stunnel]\nconnect = 127.0.0.1:${DPORT}\naccept = ${SSLPORT}" > /etc/stunnel/stunnel.conf
@@ -1023,19 +1024,19 @@ cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 service stunnel4 restart > /dev/null 2>&1
 echo -e "$barra"
-echo -e "\033[1;33m $(source trans -b pt:${id} "INSTALADO COM SUCESSO")"
+echo -e "\033[1;33m INSTALADO COM SUCESSO"
 echo -e "$barra"
 return 0
 }
 
 painel_upload () {
 echo -e "$barra"
-echo -e "${cor[2]}$(source trans -b pt:${id} "Deseja Instalar Painel De Upload?")"
+echo -e "${cor[2]} Deseja Instalar Painel De Upload?"
 echo -e "$barra"
 read -p " [ s | n ]: " up_load
 echo -e "$barra"
    [[ "$up_load" = @(s|S|y|Y) ]] && bash /etc/adm-lite/insta_painel || {
-   echo -e "${cor[2]}$(source trans -b pt:${id} "Instalacao Abortada")"
+   echo -e "${cor[2]} Instalacao Abortada"
    echo -e "$barra"
    }
 }
@@ -1119,18 +1120,18 @@ unset gettun
 unset tcpbypass
 unset webminn
 unset ddos
-[[ -e /etc/squid/squid.conf ]] && squid="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/squid3/squid.conf ]] && squid="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/default/dropbear ]] && dropbear="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/openvpn/server.conf ]] && openvpn="\033[1;32m$(source trans -b pt:${id} "Configurado")"
-[[ $(mportas|grep stunnel4|head -1) ]] && stunel="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/shadowsocks.json ]] && shadow="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ "$(ps x | grep "ultimatebot" | grep -v "grep")" != "" ]] && telegran="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/adm-lite/sockson ]] && socks="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/adm-lite/gettun ]] && gettun="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/adm-lite/edbypass ]] && tcpbypass="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /etc/webmin/miniserv.conf ]] && webminn="\033[1;32m$(source trans -b pt:${id} "Online")"
-[[ -e /usr/local/ddos/ddos.conf ]] && ddos="\033[1;32m$(source trans -b pt:${id} "Online")"
+[[ -e /etc/squid/squid.conf ]] && squid="\033[1;32m Online"
+[[ -e /etc/squid3/squid.conf ]] && squid="\033[1;32m Online"
+[[ -e /etc/default/dropbear ]] && dropbear="\033[1;32m Online"
+[[ -e /etc/openvpn/server.conf ]] && openvpn="\033[1;32m Configurado"
+[[ $(mportas|grep stunnel4|head -1) ]] && stunel="\033[1;32m Online"
+[[ -e /etc/shadowsocks.json ]] && shadow="\033[1;32m Online"
+[[ "$(ps x | grep "ultimatebot" | grep -v "grep")" != "" ]] && telegran="\033[1;32m Online"
+[[ -e /etc/adm-lite/sockson ]] && socks="\033[1;32m Online"
+[[ -e /etc/adm-lite/gettun ]] && gettun="\033[1;32m Online"
+[[ -e /etc/adm-lite/edbypass ]] && tcpbypass="\033[1;32m Online"
+[[ -e /etc/webmin/miniserv.conf ]] && webminn="\033[1;32m Online"
+[[ -e /usr/local/ddos/ddos.conf ]] && ddos="\033[1;32m Online"
 echo -e "$barra"
 echo -e "${cor[5]} MENU DE INSTALAÇÕES"
 echo -e "$barra"
