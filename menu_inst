@@ -246,7 +246,7 @@ squid3 -k reconfigure > /dev/null 2>&1
 service ssh restart > /dev/null 2>&1
 service squid3 restart > /dev/null 2>&1
 echo -e "$barra"
-echo -e ${cor[2]}SQUID CONFIGURADO\n$barra"
+echo -e "${cor[2]}SQUID CONFIGURADO\n$barra"
 #UFW
 for ufww in $(mportas|awk '{print $2}'); do
 ufw allow $ufww > /dev/null 2>&1
