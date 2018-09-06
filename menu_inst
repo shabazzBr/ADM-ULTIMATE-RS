@@ -482,15 +482,16 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 	done
 else
 	clear
-	echo 'Bem vindo ao instalador OpenVPN'
-	echo ""
+	echo -e "${cor[1]} =================================== ${cor[0]}"
+	echo -e "${cor[4]} Bem vindo ao instalador OpenVPN"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
 	# OpenVPN instalador e criação do primeiro usuario
-	echo "Responda as perguntas para iniciar a instalação"
-	echo "Responda corretamente"
-	echo ""
-	echo -e "${cor[4]}Primeiro precisaremos do ip de sua maquina,este ip está correto ${cor[0]}?"
+	echo -e "${cor[5]} Responda as perguntas para iniciar a instalação"
+	echo -e "${cor[5]} Responda corretamente"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
+	echo -e "${cor[5]} Primeiro precisaremos do ip de sua maquina,este ip está correto ${cor[0]}?"
 	read -p "IP address: " -e -i $IP IP
-	echo ""
+	echo -e "${cor[1]} =================================== ${cor[0]}"
 	echo -e "${cor[5]}Qual protocolo você deseja para as conexões OPENVPN ?"
 	echo -e "${cor[2]} [1] • ${cor[3]}UDP"
 	echo -e "${cor[2]} [2] • ${cor[3]}TCP (Recomendado)${cor[0]}"
@@ -503,11 +504,12 @@ else
 		PROTOCOL=tcp
 		;;
 	esac
-	echo ""
-	echo -e "${cor[4]}Qual porta você deseja usar ${cor[0]}?"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
+	echo -e "${cor[5]} Qual porta você deseja usar ${cor[0]}?"
 	read -p "Port: " -e -i 1194 PORT
-	echo ""
-	echo -e "${cor[5]}Qual DNS você deseja usar ?"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
+	echo -e "${cor[4]} Qual DNS você deseja usar ?"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
 	echo -e "${cor[2]} [1] • ${cor[3]}Sistema(Não Recomendado)"
 	echo -e "${cor[2]} [2] • ${cor[3]}Google (Recomendo)"
 	echo -e "${cor[2]} [3] • ${cor[3]}OpenDNS"
@@ -516,8 +518,8 @@ else
 	echo -e "${cor[2]} [6] • ${cor[3]}Verisign"
 	echo -e "${cor[2]} [7] • ${cor[3]}Cloudflare (Recomendado como opção 2)${cor[0]}"
 	read -p "DNS [1-7]: " -e -i 2 DNS
-	echo ""
-	echo -e "${cor[5]}Okay, você está pronto para executar o openvpn ${cor[0]}"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
+	echo -e "${cor[5]} Okay, você está pronto para executar o openvpn ${cor[0]}"
 	read -n1 -r -p "Pressione uma tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
 		apt-get upgrade
@@ -564,7 +566,7 @@ key server.key
 dh dh.pem
 tls-auth ta.key 0
 topology subnet
-server 10.8.0.0 255.255.248.0
+server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt" > /etc/openvpn/server.conf
 	echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
 	# DNS
@@ -714,10 +716,10 @@ verb 3
 float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "OPENVPN"
-	echo ""
-	echo "Concluido!"
-	echo ""
-	echo "Seu arquivo está disponivel em" ~/"OPENVPN.ovpn"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
+	echo -e "${cor[5]} Concluido!"
+	echo -e "${cor[5]} Seu arquivo está disponivel em" ~/"OPENVPN.ovpn"
+	echo -e "${cor[1]} =================================== ${cor[0]}"
 fi
 return 0
 }
