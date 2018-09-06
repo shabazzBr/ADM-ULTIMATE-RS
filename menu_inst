@@ -102,7 +102,7 @@ totalporta=($portasx)
 unset PORT
    for((i=0; i<${#totalporta[@]}; i++)); do
         [[ $(mportas|grep "${totalporta[$i]}") = "" ]] && {
-        echo -e " Porta Escolhida:\033[1;32m ${totalporta[$i]} OK"
+        echo -e " ${cor[2]}Porta Escolhida: ${totalporta[$i]} OK"
         PORT+="${totalporta[$i]}\n"
         } || {
         echo -e " Porta Escolhida:\033[1;31m ${totalporta[$i]} FAIL"
@@ -245,6 +245,7 @@ echo -e "$barra\n \033[1;31m[!] \033[1;33mREINICIANDO SERVICOS"
 squid3 -k reconfigure > /dev/null 2>&1
 service ssh restart > /dev/null 2>&1
 service squid3 restart > /dev/null 2>&1
+service squid restart > /dev/null 2>&1
 echo -e "$barra"
 echo -e "${cor[2]} SQUID CONFIGURADO\n$barra"
 #UFW
@@ -408,7 +409,8 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			1) 
 			nano /etc/openvpn/client-common.txt
 			sleep 1
-			menu;;
+			return 0
+			;;
 			2)
 			# This option could be documented a bit better and maybe even be simplimplified
 			# ...but what can I say, I want some sleep too
@@ -440,7 +442,8 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			echo -e "$barra"
 			echo "Usuario removido"
 			sleep 1
-			menu;;
+			return 0
+			;;
 			3) 
 			echo -e "$barra"
 			echo -ne "${cor[5]}Deseja remover OpenVPN? [s/n]: ${cor[0]}"; read REMOVE
@@ -484,13 +487,14 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			    echo -e "${cor[2]}Removendo o OpenVPN!${cor[0]}"
 			    fun_bar 'rmv_open'
 				echo -e "$barra"
-				echo "${cor[4]}OpenVPN removido!${cor[0]}"
+				echo -e "${cor[4]}OpenVPN removido!${cor[0]}"
 			else
 				echo -e "$barra"
 				echo "Remoção abordada!"
 			fi
 			sleep 2
-			menu;;
+			return 0
+			;;
 			4)
             if grep "duplicate-cn" /etc/openvpn/server.conf > /dev/null; then
             	clear
@@ -521,7 +525,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
                 }
                 fun_spinmult
             	sleep 2
-                menu
+                return 0
             else
             	clear
             	fun_multoff () {
@@ -552,9 +556,9 @@ if [[ -e /etc/openvpn/server.conf ]]; then
                 }
                 fun_spinmult2
             	sleep 2
-                menu
             fi
-            menu;;
+	    return 0
+            ;;
 			0) 
 			menu;;
 		esac
@@ -595,7 +599,6 @@ else
 	read -p "DNS [1-7]: " -e -i 2 DNS
     echo -e "$barra"
 	if [[ "$OS" = 'debian' ]]; then
-	    echo -e "$barra"
 		echo -e "${cor[2]}ATUALIZANDO O SISTEMA"
 		fun_attos () {
 		apt-get update
@@ -750,7 +753,7 @@ exit 0' > $RCLOCAL
 		fi
 	fi
 	}
-	echo -e "${cor[2]} INSTALANDO O OPENVPN  ${cor[4]}(${cor[5]}PODE DEMORAR!${cor[4]})"
+	echo -e "${cor[2]} INSTALANDO O OPENVPN  ${cor[4]}(PODE DEMORAR!)"
 	fun_bar 'fun_dep'
 	# And finally, restart OpenVPN
 	fun_ropen () {
