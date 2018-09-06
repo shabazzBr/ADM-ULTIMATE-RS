@@ -443,7 +443,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			menu;;
 			3) 
 			echo -e "$barra"
-			read -p "Você deseja remover OpenVPN? [s/n]: " -e -i n REMOVE
+			echo -ne "${cor[5]}Deseja remover OpenVPN? [s/n]: ${cor[0]}"; read REMOVE
 			if [[ "$REMOVE" = 's|S' ]]; then
 				rmv_open () {
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -598,13 +598,13 @@ else
 	echo -e "${cor[2]} Okay, você está pronto para executar o openvpn ${cor[0]}"
 	read -n1 -r -p "Pressione uma tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
+	    echo -e "$barra"
 		echo -e "${cor[2]}ATUALIZANDO O SISTEMA"
 		fun_attos () {
 		apt-get update-y
 		apt-get upgrade -y
 	    }
 	    fun_bar 'fun_attos'
-		echo ""
 		echo -e "${cor[2]}INSTALANDO DEPENDENCIAS"
 		fun_instdep () {
 		apt-get install openvpn iptables openssl ca-certificates -y
@@ -755,7 +755,6 @@ exit 0' > $RCLOCAL
 	fi
 	}
 	echo -e "${cor[2]} INSTALANDO O OPENVPN  ${cor[4]}(${cor[5]}PODE DEMORAR!${cor[4]})"
-	echo ""
 	fun_bar 'fun_dep'
 	# And finally, restart OpenVPN
 	fun_ropen () {
@@ -777,16 +776,14 @@ exit 0' > $RCLOCAL
 	fi
 	}
 	echo -e "${cor[2]} REINICIANDO O OPENVPN"
-	echo ""
 	fun_bar 'fun_ropen'
 	# Try to detect a NATed connection and ask about it to potential LowEndSpirit users
 	EXTERNALIP=$(wget -4qO- "http://whatismyip.akamai.com/")
 	if [[ "$IP" != "$EXTERNALIP" ]]; then
-		echo ""
-		echo -e "\033[1;31mPARECE QUE SEU SERVIDOR ESTA ATRAS DE UM NAT\033[0m"
-		echo ""
-		echo -e "\033[1;31mPOR FAVOR, INFORME SEU IP EXTERNO\033[0m"
-		echo -e "\033[1;31mCASO NAO SEJA PROSSIGA COM ENTER\033[0m"
+		echo -e "$barra"
+		echo -e "${cor[4]} PARECE QUE SEU SERVIDOR ESTA ATRAS DE UM NAT${cor[0]}"
+		echo -e "${cor[5]} POR FAVOR, INFORME SEU IP EXTERNO${cor[0]}"
+		echo -e "${cor[5]} CASO NAO SEJA PROSSIGA COM ENTER${cor[0]}"
 		read -p "External IP: " -e USEREXTERNALIP
 		if [[ "$USEREXTERNALIP" != "" ]]; then
 			IP=$USEREXTERNALIP
