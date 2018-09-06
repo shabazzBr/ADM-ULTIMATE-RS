@@ -117,7 +117,7 @@ echo -e "$barra"
 echo -e " INICIANDO CONFIGURACAO"
 echo -e "$barra\n\033[1;32m Agora Escolha Uma Conf Para Seu Proxy\n$barra"
 echo -e " |1| Comum"
-echo -e " |2| Customizado -\033[1;31m "Usuario Deve Ajustar\033[1;37m\n$barra"
+echo -e " |2| Customizado -\033[1;31m Usuario Deve Ajustar\033[1;37m\n$barra"
 read -p " [1/2]: " -e -i 1 proxy_opt
 unset var_squid
 if [[ -d /etc/squid ]]; then
