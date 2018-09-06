@@ -95,7 +95,7 @@ echo -ne " Confirme seu ip"; read -p ": " -e -i $IP ip
 echo -e "$barra"
 echo -e "${cor[5]} Agora Escolha as Portas que Deseja No Squid"
 echo -e "${cor[5]} Adicione As Portas Em Ordem Sequencial Exemplo: ${cor[0]}80 8080 8799"
-echo -ne "${cor[5]} Digite as Portas${cor[0]}: "; read portasx
+echo -ne " Digite as Portas: "; read portasx
 totalporta=($portasx)
 unset PORT
    for((i=0; i<${#totalporta[@]}; i++)); do
