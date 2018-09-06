@@ -92,9 +92,10 @@ fun_squid  () {
 echo -e "$barra\n\033[1;32m INSTALADOR SQUID\n$barra"
 fun_ip
 echo -ne " Confirme seu ip"; read -p ": " -e -i $IP ip
-echo -e "$barra\n Agora Escolha as Portas que Deseja No Squid"
-echo -e " Escolha As Portas Em Ordem Sequencial Exemplo: 80 8080 8799"
-echo -ne " Digite as Portas: "; read portasx
+echo -e "$barra"
+echo -e "${cor[5]} Agora Escolha as Portas que Deseja No Squid"
+echo -e "${cor[5]} Adicione As Portas Em Ordem Sequencial Exemplo: ${cor[0]}80 8080 8799"
+echo -ne "${cor[5]} Digite as Portas${cor[0]}: "; read portasx
 totalporta=($portasx)
 unset PORT
    for((i=0; i<${#totalporta[@]}; i++)); do
@@ -110,14 +111,15 @@ unset PORT
   return 1
   }
 echo -e "$barra"
-echo -e " INSTALANDO SQUID"
+echo -e "${cor[5]} INSTALANDO SQUID"
 echo -e "$barra"
 fun_bar "apt-get install squid3 -y"
 echo -e "$barra"
-echo -e " INICIANDO CONFIGURACAO"
-echo -e "$barra\n\033[1;32m Agora Escolha Uma Conf Para Seu Proxy\n$barra"
-echo -e " |1| Comum"
-echo -e " |2| Customizado -\033[1;31m Usuario Deve Ajustar\033[1;37m\n$barra"
+echo -e "${cor[5]} INICIANDO CONFIGURACAO"
+echo -e "$barra"
+echo -e "${cor[5]} Agora Escolha Uma Conf Para Seu Proxy\n$barra"
+echo -e "${cor[2]} [1] • ${cor[3]} Comum"
+echo -e "${cor[2]} [2] • ${cor[3]} Customizado -\033[1;31m Usuario Deve Ajustar\033[1;37m\n$barra"
 read -p " [1/2]: " -e -i 1 proxy_opt
 unset var_squid
 if [[ -d /etc/squid ]]; then
