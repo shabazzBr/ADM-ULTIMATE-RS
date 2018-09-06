@@ -246,7 +246,7 @@ squid3 -k reconfigure > /dev/null 2>&1
 service ssh restart > /dev/null 2>&1
 service squid3 restart > /dev/null 2>&1
 echo -e "$barra"
-echo -e "${cor[2]}SQUID CONFIGURADO\n$barra"
+echo -e "${cor[2]} SQUID CONFIGURADO\n$barra"
 #UFW
 for ufww in $(mportas|awk '{print $2}'); do
 ufw allow $ufww > /dev/null 2>&1
@@ -444,7 +444,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			3) 
 			echo -e "$barra"
 			echo -ne "${cor[5]}Deseja remover OpenVPN? [s/n]: ${cor[0]}"; read REMOVE
-			if [[ "$REMOVE" = 's|S' ]]; then
+			if [[ "$REMOVE" = 's' ]]; then
 				rmv_open () {
 				PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 				PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -482,7 +482,6 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				rm -rf /usr/share/doc/openvpn*
 			    }
 			    echo -e "${cor[2]}Removendo o OpenVPN!${cor[0]}"
-			    echo ""
 			    fun_bar 'rmv_open'
 				echo -e "$barra"
 				echo "${cor[4]}OpenVPN removido!${cor[0]}"
@@ -490,7 +489,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 				echo -e "$barra"
 				echo "Remoção abordada!"
 			fi
-			sleep 1
+			sleep 2
 			menu;;
 			4)
             if grep "duplicate-cn" /etc/openvpn/server.conf > /dev/null; then
@@ -566,7 +565,7 @@ else
     echo -e "$barra"
 	# OpenVPN instalador e criação do primeiro usuario
 	echo -e "${cor[5]} Responda as perguntas para iniciar a instalação"
-	echo -e "${cor[5]} Primeiro precisaremos do ip de sua maquina,este ip está correto ${cor[3]}?"
+	echo -e "${cor[5]} Primeiro precisaremos do ip de sua maquina,este ip está correto ?${cor[3]}"
 	read -p "IP address: " -e -i $IP IP
     echo -e "$barra"
 	echo -e "${cor[5]} Qual protocolo você deseja para as conexões OPENVPN ?"
@@ -582,7 +581,7 @@ else
 		;;
 	esac
     echo -e "$barra"
-	echo -e "${cor[5]} Qual porta você deseja usar ${cor[3]}?"
+	echo -e "${cor[5]} Qual porta você deseja usar ?"
 	read -p "Port: " -e -i 1194 PORT
     echo -e "$barra"
 	echo -e "${cor[5]} Qual DNS você deseja usar ?"
@@ -601,8 +600,8 @@ else
 	    echo -e "$barra"
 		echo -e "${cor[2]}ATUALIZANDO O SISTEMA"
 		fun_attos () {
-		apt-get update-y
-		apt-get upgrade -y
+		apt-get update
+		apt-get upgrade
 	    }
 	    fun_bar 'fun_attos'
 		echo -e "${cor[2]}INSTALANDO DEPENDENCIAS"
@@ -621,7 +620,6 @@ else
 		rm -rf /etc/openvpn/easy-rsa/
 	fi
 	# Adquirindo easy-rsa
-	echo ""
 	fun_dep () {
 	wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/OpenVPN/easy-rsa/releases/download/3.0.1/EasyRSA-3.0.1.tgz"
 	tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
@@ -781,9 +779,9 @@ exit 0' > $RCLOCAL
 	EXTERNALIP=$(wget -4qO- "http://whatismyip.akamai.com/")
 	if [[ "$IP" != "$EXTERNALIP" ]]; then
 		echo -e "$barra"
-		echo -e "${cor[4]} PARECE QUE SEU SERVIDOR ESTA ATRAS DE UM NAT${cor[0]}"
-		echo -e "${cor[5]} POR FAVOR, INFORME SEU IP EXTERNO${cor[0]}"
-		echo -e "${cor[5]} CASO NAO SEJA PROSSIGA COM ENTER${cor[0]}"
+		echo -e "${cor[3]} Parece que seu Servidor está atrás de um NAT"
+		echo -e "${cor[5]} Por favor, informe o seu ip externo"
+		echo -e "${cor[5]} Caso não seja prossiga com Enter"
 		read -p "External IP: " -e USEREXTERNALIP
 		if [[ "$USEREXTERNALIP" != "" ]]; then
 			IP=$USEREXTERNALIP
@@ -812,7 +810,7 @@ float" > /etc/openvpn/client-common.txt
 	# Generates the custom client.ovpn
 	newclient "OPENVPN"
     echo -e "$barra"
-	echo -e "${cor[5]} Concluido!"
+	echo -e "${cor[2]} Concluido!"
 	echo -e "${cor[5]} Seu arquivo está disponivel em" ~/"OPENVPN.ovpn"
     echo -e "$barra"
 fi
