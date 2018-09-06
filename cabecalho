@@ -57,7 +57,7 @@ echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=
 echo -e "${cor[5]} Tem Certeza Disso?"
 read -p " [ s / n ]: " certe_za
 [[ "$certe_za" = @(s|S|y|Y) ]] && {
-[[ -e /etc/openvpn/server.conf ]] && remover_ovpn & > /dev/null 2>&1
+[[ -e /etc/openvpn/server.conf ]] && source menu_inst && rmv_open & > /dev/null 2>&1
 echo -e "${cor[5]} Unistaling python${cor[0]}"
 fun_bar 'apt-get purge python' 'apt-get purge python3-pip'
 echo -e "${cor[5]} Unistaling Nmap${cor[0]}"
