@@ -487,7 +487,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
 			    echo -e "${cor[2]}Removendo o OpenVPN!${cor[0]}"
 			    fun_bar 'rmv_open'
 				echo -e "$barra"
-				echo -e "${cor[4]}OpenVPN removido!${cor[0]}"
+				echo -e "${cor[2]}OpenVPN removido!${cor[0]}"
 			else
 				echo -e "$barra"
 				echo "Remoção abordada!"
@@ -753,7 +753,7 @@ exit 0' > $RCLOCAL
 		fi
 	fi
 	}
-	echo -e "${cor[2]} INSTALANDO O OPENVPN  ${cor[4]}(PODE DEMORAR!)"
+	echo -e "${cor[2]} INSTALANDO O OPENVPN  ${cor[5]}(PODE DEMORAR!)"
 	fun_bar 'fun_dep'
 	# And finally, restart OpenVPN
 	fun_ropen () {
