@@ -727,7 +727,7 @@ credit=$(cat ./menu_credito)
 __IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 [[ "$VERIFICAR" = "on" ]] && 
-echo -e "${cor[2]} • \033[1;37mUSUARIOS ONLINE $__onlines ${cor[2]}    • \033[1;37mUSUARIOS VENCIDOS $__vencidos"
 echo -e "${cor[2]} • \033[1;37mOS: $_os   ${cor[2]} • \033[1;37mIP: \033[1;31m$__IP"
+echo -e "${cor[2]} • \033[1;37mUSUARIOS ONLINE $__onlines ${cor[2]}    • \033[1;37mUSUARIOS VENCIDOS $__vencidos"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 minhas_portas
