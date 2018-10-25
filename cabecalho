@@ -725,11 +725,13 @@ rm $porta_var
 [[ $v1 = $v2 ]] && vesaoSCT="\033[1;32mPARABENS SUA VERSAO ESTA ATUALIZADA!" || vesaoSCT="\033[1;31mADM-ULTIMATE POSSUI ATUALIZACOES!"
 credit=$(cat ./menu_credito)
 __IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+[[ "$VERIFICAR" = "on" ]] &&
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-[[ "$VERIFICAR" = "on" ]] && 
-echo -e "\033[1;31mSISTEMA OPERACIONAL: $_os"
-echo -e "\033[1;31mENDERECO DA MAQUINA: \033[1;37m$__IP"
-echo -e "\033[1;31mUSUARIOS ONLINE $__onlines"
-echo -e "\033[1;31mUSUARIOS VENCIDOS $__vencidos"
+echo -e "\033[1;33m PORTAS ATIVAS E INFORMACOES DO SERVIDOR"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-minhas_portas
+minhas_portas 
+echo -e "\033[1;31m SISTEMA OPERACIONAL: $_os"
+echo -e "\033[1;31m ENDERECO DA MAQUINA: \033[1;32m$__IP"
+echo -e "\033[1;31m USUARIOS ONLINE $__onlines"
+echo -e "\033[1;31m USUARIOS VENCIDOS $__vencidos"
+echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
