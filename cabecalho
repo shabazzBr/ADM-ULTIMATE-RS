@@ -38,15 +38,13 @@ fun_bar 'apt-get install lsof' 'apt-get install python3-pip'
 echo -e "${cor[2]} $text Lsof"
 fun_bar 'apt-get install htop' 'apt-get install unzip' 'apt-get install nload'
 echo -e "${cor[2]} $text Python3"
-fun_bar 'apt-get install zip' 'apt-get install apache2'
+fun_bar 'apt-get install zip' 'apt-get install htop'
 echo -e "${cor[2]} $text Unzip"
 fun_bar 'apt-get install ufw' 'apt-get install nmap'
 echo -e "${cor[2]} $text Screen"
 fun_bar 'apt-get install figlet' 'apt-get install bc'
 echo -e "${cor[2]} $text Apache2"
 fun_bar 'apt-get install lynx' 'apt-get install curl'
-sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
-service apache2 restart > /dev/null 2>&1
 }
     [[ "$1" = "--instalar" ]] && {
     instalar_fun
