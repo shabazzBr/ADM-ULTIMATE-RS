@@ -638,53 +638,46 @@ return
 }
 
 minhas_portas () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[4]}"
-portas_var="/tmp/portas"
-porta_var="/tmp/portas2"
-lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN" > $portas_var
+local portasVAR=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
+local NOREPEAT
+local reQ
+local Port
 while read port; do
-var1=$(echo $port | awk '{print $1}')
-var2=$(echo $port | awk '{print $9}' | awk -F ":" '{print $2}')
- if [ ! -e "$porta_var" ]; then
- echo -e "$var1 $var2" > $porta_var
- fi
- if [ "$(cat $porta_var | grep "$var1" | grep "$var2")" = "" ]; then
- echo -e "$var1 $var2" >> $porta_var
- fi
-done < $portas_var
-i=1
-while read pts; do
- if [ "$pts" = "" ]; then
- break
- fi
-service_porta[$i]=$(echo "$pts" | awk '{print $2}')
-service_serv[$i]=$(echo "$pts" | awk '{print $1}')
-echo -e " \033[1;37m[$i] -> \033[1;31m${service_serv[$i]} : \033[1;32m${service_porta[$i]}"
-i=$(($i+1))
-done < $porta_var
-echo -e "${cor[5]} Escolha O Serviço Para Gerenciar Portas"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× \033[1;37m"
-read -p " [1-$(($i-1))]: " nun
-echo -e "\033[1;31m Serviço e Porta Escolhidos: \033[1;32m${service_porta[$nun]}\033[1;31m : \033[1;32m${service_serv[$nun]}\033[0m"
-rm $portas_var
-rm $porta_var
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-if [ "${service_serv[$nun]}" = "dropbear" ]; then
-open_dropbear ${service_porta[$nun]}
-elif [ "${service_serv[$nun]}" = "sshd" ]; then
-open_ssh ${service_porta[$nun]}
-elif [ "${service_serv[$nun]}" = "squid3" ]; then
-open_squid ${service_porta[$nun]}
-elif [ "${service_serv[$nun]}" = "squid" ]; then
-open_squid ${service_porta[$nun]}
-elif [ "${service_serv[$nun]}" = "python" ]; then
-open_python ${service_porta[$nun]}
-elif [ "${service_serv[$nun]}" = "python3" ]; then
-open_python ${service_porta[$nun]}
-else
-echo -e "\033[1;31m Nenhum Serviço Escolhido, Ou O Serviço Escolhido Nao e Suportado\033[0m"
-fi
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+reQ=$(echo ${port}|awk '{print $1}')
+Port=$(echo {$port} | awk '{print $9}' | awk -F ":" '{print $2}')
+[[ $(echo -e $NOREPEAT|grep -w "$Port") ]] && continue
+NOREPEAT+="$Port\n"
+case ${reQ} in
+squid|squid3)
+[[ -z $SQD ]] && local SQD="\033[1;31m SQUID: \033[1;32m"
+SQD+="$Port ";;
+apache|apache2)
+[[ -z $APC ]] && local APC="\033[1;31m APACHE: \033[1;32m"
+APC+="$Port ";;
+ssh|sshd)
+[[ -z $SSH ]] && local SSH="\033[1;31m SSH: \033[1;32m"
+SSH+="$Port ";;
+dropbear)
+[[ -z $DPB ]] && local DPB="\033[1;31m DROPBEAR: \033[1;32m"
+DPB+="$Port ";;
+openvpn)
+[[ -z $OVPN ]] && local OVPN="\033[1;31m OPENVPN: \033[1;32m"
+OVPN+="$Port ";;
+stunnel4|stunnel)
+[[ -z $SSL ]] && local SSL="\033[1;31m SSL: \033[1;32m"
+SSL+="$Port ";;
+python|python3)
+[[ -z $PY3 ]] && local PY3="\033[1;31m SOCKS: \033[1;32m"
+PY3+="$Port ";;
+esac
+done <<< "${portasVAR}"
+[[ ! -z $SQD ]] && echo -e $SQD
+[[ ! -z $APC ]] && echo -e $APC
+[[ ! -z $SSH ]] && echo -e $SSH
+[[ ! -z $DPB ]] && echo -e $DPB
+[[ ! -z $OVPN ]] && echo -e $OVPN
+[[ ! -z $PY3 ]] && echo -e $PY3
+[[ ! -z $SSL ]] && echo -e $SSL
 }
 
 #VERIFICA SE E NUMERICO
@@ -737,4 +730,4 @@ echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=
 echo -e "${cor[2]} • \033[1;37mUSUARIOS ONLINE $__onlines ${cor[2]}    • \033[1;37mUSUARIOS VENCIDOS $__vencidos"
 echo -e "${cor[2]} • \033[1;37mOS: $_os   ${cor[2]} • \033[1;37mIP: \033[1;31m$__IP"
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-ports_
+minhas_portas
