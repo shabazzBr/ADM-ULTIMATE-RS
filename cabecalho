@@ -53,7 +53,7 @@ service apache2 restart > /dev/null 2>&1
     exit 0
     }
 remover_adm () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Tem Certeza Disso?"
 read -p " [ s / n ]: " certe_za
 [[ "$certe_za" = @(s|S|y|Y) ]] && {
@@ -76,11 +76,11 @@ apt-get autoremove -y > /dev/null 2>&1
 echo -e "${cor[5]} SUCESS! :D${cor[0]}"
 [[ -e /etc/adm-lite ]] && rm -rf /etc/adm-lite
 echo -e "\033[0m"
- echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+ echo -e "${cor[1]} ====================================================== ${cor[0]}"
  exit
   } || {
  echo -e "${cor[1]} Desinstalação Cancelada Pelo Usuario ${cor[0]}"
- echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+ echo -e "${cor[1]} ====================================================== ${cor[0]}"
  return
  }
 }
@@ -123,15 +123,15 @@ unset limiter_on
  } || {
 touch $_modulos
 }
-[[ $(ps x|grep -v grep|grep limiter.sh|awk '{print $1}') ]] &&  limiter_on="\033[1;32mON"
-[[ $VERIFICAR = "on" ]] && limiter_on="\033[1;32mON"
+[[ $(ps x|grep -v grep|grep limiter.sh|awk '{print $1}') ]] &&  limiter_on="\033[1;32mon"
+[[ $VERIFICAR = "on" ]] && limiter_on="\033[1;32mon"
 
 #TEXTOS
 [[ "$(echo ADM-MANAGER-ULTIMATE)" = "" ]] && source idioma_geral
 _system=$(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/      //')
 [[ "$_os" = "" ]] && system[1]=$(echo $_system) && system[2]=$(echo ${system[1]} | awk '{print $1, $2}') && _os="\033[1;37m${system[2]}"
-_on="\033[1;32m[ ON ]"
-_off="\033[1;31m[ OFF ]"
+_on="\033[1;32mon"
+_off="\033[1;31moff"
 
 #PIDSVARIAVEIS
 unset pid_badvpn && pid_badvpn=$(netstat -nlpt | egrep -o udpgw)
@@ -229,7 +229,7 @@ fi
 }
 
 funcao_cores () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} SUAS CORES USADAS ATUALMENTE"
 echo -e "${cor[1]} • AABBCCDDEEFF"
 echo -e "${cor[2]} • AABBCCDDEEFF"
@@ -244,11 +244,11 @@ ncor[4]="\033[1;34m"
 ncor[5]="\033[1;35m"
 ncor[6]="\033[1;36m"
 ncor[7]="\033[1;37m"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${ncor[1]} [1]•AA ${ncor[2]} [2]•AA ${ncor[3]} [3]•AA"
 echo -e "${ncor[4]} [4]•AA ${ncor[5]} [5]•AA ${ncor[6]} [6]•AA"
 echo -e "${ncor[7]} [7]•AA"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Escolha em Ordem, 1 2 3 4 5 6"
 unset ncor
 read -p " Qual a Sequência de cores? " _cores_
@@ -311,10 +311,10 @@ idioma[4]="it Italian"
 idioma[5]="pt Portuguese"
 idioma[6]="es Spanish"
 i="1"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Esse Recurso Ira Traduzir Todo Conteúdo do ADM-ULTIMATE
  Selecione o numero do idioma, ou Use as iniciais do idioma"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[3]}"
+echo -e "${cor[1]} ====================================================== ${cor[3]}"
 while true; do
 [[ "${idioma[$i]}" = "" ]] && break
 a=$(echo ${idioma[$i]} | awk '{print $2}')
@@ -330,7 +330,7 @@ texto3=$(printf '%-20s' "[ $i ]-$a")
 i=$(($i+1))
 echo -e "$texto1 $texto2 $texto3"
 done
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e " Digite o Idioma:"
 read -p " => " idiom
 number_var $idiom > /dev/null 2>&1
@@ -365,7 +365,7 @@ echo ""
 fi
 done
 echo ""
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "\033[0m"
 unset idioma
 exit 0
@@ -393,7 +393,7 @@ echo -e "${cor[2]} |$_cont| >${cor[5]} $u"
 [[ "$u" = "" ]] && break
 _cont=$(($_cont + 1))
 done
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Escolha o Usuario, ou Escreva o Nome"
 echo -ne "${cor[6]}"
 read -p " ${txt[9]} " select_user
@@ -461,7 +461,7 @@ fun_atualizar () {
 cd /etc/adm-lite
 chmod 777 ./*
 echo -e "${cor[4]} "DESEJA ATUALIZAR O SCRIPT?"\033[0m"
-read -p " [S/N]: " -e -i n sshsn
+read -p " [S/N]: " -e -i s sshsn
 [[ "$sshsn" = @(s|S|y|Y) ]] && {
 [[ -e /etc/adm-lite/idioma ]] && rm /etc/adm-lite/idioma
 ./updateadm
@@ -502,7 +502,7 @@ useradd -M -s /bin/false -d /home/ovpn/ $CLIENT -e $valid
 usermod -p $(openssl passwd -1 $senha) $CLIENT
 #Arquivo
 echo -e " Criar um novo arquivo OpenVPN?"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× \033[1;37m"
+echo -e "${cor[1]} ====================================================== \033[1;37m"
 read -p " [S/N]: " -e -i S newfile
   [[ ${newfile} = @(s|S|y|Y) ]] && {
   echo -e " Criar arquivo com autenticação (usuario e senha)?"
@@ -628,7 +628,7 @@ open_python () {
 echo -e "${cor[2]} ${cor[5]}Deseja Fexar A Porta Atual?"
 read -p " [S/N]: " -e -i n pthsn
 [[ "$pthsn" = @(s|S|y|Y) ]] && {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 porta="$1"
 fuser -k $porta/tcp > /dev/null 2>&1
 sleep 2s
@@ -638,7 +638,7 @@ return
 }
 
 minhas_portas () {
-echo -e "${cor[1]} =================================== ${cor[4]}"
+echo -e "${cor[1]} ====================================================== ${cor[4]}"
 portas_var="/tmp/portas"
 porta_var="/tmp/portas2"
 lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN" > $portas_var
@@ -662,13 +662,13 @@ service_serv[$i]=$(echo "$pts" | awk '{print $1}')
 echo -e " \033[1;37m[$i] -> \033[1;31m${service_serv[$i]} : \033[1;32m${service_porta[$i]}"
 i=$(($i+1))
 done < $porta_var
-echo -e "${cor[5]} ${txt[277]}"
-echo -e "${cor[1]} =================================== \033[1;37m"
+echo -e "${cor[5]} Escolha O Serviço Para Gerenciar Portas"
+echo -e "${cor[1]} ====================================================== \033[1;37m"
 read -p " [1-$(($i-1))]: " nun
-echo -e "\033[1;31m ${txt[283]} \033[1;32m${service_porta[$nun]}\033[1;31m : \033[1;32m${service_serv[$nun]}\033[0m"
+echo -e "\033[1;31m Serviço e Porta Escolhidos: \033[1;32m${service_porta[$nun]}\033[1;31m : \033[1;32m${service_serv[$nun]}\033[0m"
 rm $portas_var
 rm $porta_var
-echo -e "${cor[1]} =================================== ${cor[0]}"
+echo -e "${cor[1]} ======================================================= ${cor[0]}"
 if [ "${service_serv[$nun]}" = "dropbear" ]; then
 open_dropbear ${service_porta[$nun]}
 elif [ "${service_serv[$nun]}" = "sshd" ]; then
@@ -682,7 +682,7 @@ open_python ${service_porta[$nun]}
 elif [ "${service_serv[$nun]}" = "python3" ]; then
 open_python ${service_porta[$nun]}
 else
-echo -e "\033[1;31m ${txt[278]}\033[0m"
+echo -e "\033[1;31m Nenhum Serviço Escolhido, Ou O Serviço Escolhido Nao e Suportado\033[0m"
 fi
 }
 
@@ -732,11 +732,11 @@ done <<< "${portasVAR}"
 [[ $v1 = $v2 ]] && vesaoSCT="\033[1;32mPARABENS SUA VERSAO ESTA ATUALIZADA!" || vesaoSCT="\033[1;31mADM-ULTIMATE POSSUI ATUALIZACOES!"
 credit=$(cat ./menu_credito)
 __IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "\033[1;33m PORTAS ATIVAS E INFORMACOES DO SERVIDOR"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 ports_
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "\033[1;31m SISTEMA OPERACIONAL: $_os"
 echo -e "\033[1;31m ENDERECO DA MAQUINA: \033[1;37m$__IP"
 [[ "$VERIFICAR" = "on" ]] &&
