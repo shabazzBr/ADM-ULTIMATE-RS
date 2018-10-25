@@ -129,7 +129,7 @@ touch $_modulos
 #TEXTOS
 [[ "$(echo ADM-MANAGER-ULTIMATE)" = "" ]] && source idioma_geral
 _system=$(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/      //')
-[[ "$_os" = "" ]] && system[1]=$(echo $_system) && system[2]=$(echo ${system[1]} | awk '{print $1, $2}') && _os="\033[1;32m${system[2]}"
+[[ "$_os" = "" ]] && system[1]=$(echo $_system) && system[2]=$(echo ${system[1]} | awk '{print $1, $2}') && _os="\033[1;37m${system[2]}"
 _on="\033[1;32m[ ON ]"
 _off="\033[1;31m[ OFF ]"
 
@@ -140,8 +140,8 @@ unset fail2_ban && fail2_ban=$(dpkg -l | grep fail2ban | grep ii)
 [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]] && _tcpspeed="$_off" || _tcpspeed="$_on"
 [[ "$fail2_ban" = "" ]] && fail_b="$_off" || fail_b="$_on"
 [[ "$VERIFICAR" = "on" ]] && VERIFICAR_PID="$_on" || VERIFICAR_PID="$_off"
-[[ -e ./onlines ]] && __onlines="\033[1;32m$(cat ./onlines)" || __onlines="\033[1;32m0"
-[[ -e ./vencidos ]] && __vencidos="\033[1;32m$(cat ./vencidos)" || __vencidos="\033[1;32m0"
+[[ -e ./onlines ]] && __onlines="\033[1;37m$(cat ./onlines)" || __onlines="\033[1;37m0"
+[[ -e ./vencidos ]] && __vencidos="\033[1;37m$(cat ./vencidos)" || __vencidos="\033[1;37m0"
 [[ "$(ps x | grep "ultimatebot" | grep -v "grep")" != "" ]] && bot="$_on" || bot="$_off"
 [[ ! -e /etc/adm-lite/versao_script ]] && echo 1 > /etc/adm-lite/versao_script
 P_SERVER="https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master"
@@ -731,7 +731,7 @@ echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=
 minhas_portas
 echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
 echo -e "\033[1;31m SISTEMA OPERACIONAL: $_os"
-echo -e "\033[1;31m ENDERECO DA MAQUINA: \033[1;32m$__IP"
+echo -e "\033[1;31m ENDERECO DA MAQUINA: \033[1;37m$__IP"
 [[ "$VERIFICAR" = "on" ]] &&
 echo -e "\033[1;31m USUARIOS ONLINE $__onlines"
 [[ "$VERIFICAR" = "on" ]] &&
