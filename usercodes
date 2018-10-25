@@ -14,7 +14,7 @@ net_meter () {
 net_dir="/etc/adm-lite/userDIR/usr_cnx"
 if [ ! -e "$net_dir" ]; then
 echo -e "${cor[5]} Verificação Nao Ativa, Ou Nao Existe Informações"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
+echo -e "${cor[1]} ======================================================\033[0m"
 return
 fi
 net_cent="/tmp/porcentagem"
@@ -28,9 +28,9 @@ sed -i '/^$/d' $net_dir
 bb=$(printf '%-18s' "USO APROXIMADO")
 aa=$(printf '%-19s' "USUARIO")
 cc=$(printf '%-18s' "CONSUMO TOTAL")
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
+echo -e "${cor[1]} ======================================================\033[0m"
 echo -e "\033[1;33m $aa $bb $cc"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
+echo -e "${cor[1]} ======================================================\033[0m"
 while read u; do
 b=$(printf '%-18s' "$(($(echo $u | awk '{print $2}')/970)) - MB")
 a=$(printf '%-20s' "$(echo $u | awk '{print $1}')")
@@ -45,7 +45,7 @@ echo -e "\033[1;32m $a \033[1;31m$b \033[1;32m$c"
 fi
 done < $net_dir
 [[ "$(cat $net_dir)" = "" ]] && echo -e "${cor[5]} Verificação Nao esta Ativada, Ou Ainda Nao Existe Informações"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×\033[0m"
+echo -e "${cor[1]} ======================================================\033[0m"
 unset net_dir
 }
 
@@ -112,15 +112,15 @@ return
 }
 
 function_1 () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[4]} TODOS USUARIOS CADASTRADOS"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 for u in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi system-`; do
 echo -e "${cor[5]} $u"
 done
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-echo -e "${cor[4]} CRIADOR DE USUARIOS ADM-ULTIMATE"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
+echo -e "${cor[4]} CRIADOR DE USUARIOS OLD-ULTIMATE"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Nome do novo usuario:"; read -p " ≈≈≈≈≈> " name
 if [ -z $name ]; then
 echo -e "${cor[5]} Nome Nulo ${cor[0]}" 
@@ -131,16 +131,16 @@ then
 echo -e "${cor[5]} Usuário Já existente! ${cor[0]}"
 return
 fi
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Senha Para o Usuario $name"
 read -p " Senha: " pass
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Duração Para O Usuario  $name"
 read -p " Validade: " daysrnf
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Limite de Conexão Para o Usuario  $name"
 read -p " Limite: " limit
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ======================================================× ${cor[0]}"
 meu_ip
 if [ "$OPENVPN" = "on" ]; then
 open_1 $name $pass $daysrnf $limit s
@@ -149,7 +149,7 @@ echo -e "${cor[5]} Usuario: ${cor[4]}$name"
 echo -e "${cor[5]} Senha: ${cor[4]}$pass"
 echo -e "${cor[5]} Limite: ${cor[4]}$limit"
 echo -e "${cor[5]} Validade: ${cor[4]}$datexp"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 rm ./$CLIENT.ovpn > /dev/null 2>&1
 return
 fi
@@ -162,7 +162,7 @@ echo -e "${cor[5]} Usuario: ${cor[4]}$name"
 echo -e "${cor[5]} Senha: ${cor[4]}$pass"
 echo -e "${cor[5]} Limite: ${cor[4]}$limit"
 echo -e "${cor[5]} Validade: ${cor[4]}$datexp"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo "senha: $pass" > $dir_user/$name
 echo "limite: $limit" >> $dir_user/$name
 echo "data: $valid" >> $dir_user/$name
@@ -171,18 +171,18 @@ return
 }
 
 function_2 () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[4]} REMOCAO DE USUARIOS"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
-echo -e "${cor[2]} [1] •${cor[3]} Deletar 1 Usuario"
-echo -e "${cor[2]} [2] •${cor[3]} Deletar Todos Usuarios"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
+echo -e "${cor[2]} [1] \033[1;31m>${cor[3]} Deletar 1 Usuario"
+echo -e "${cor[2]} [2] \033[1;31m>${cor[3]} Deletar Todos Usuarios"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -ne "${cor[6]}"
 read -p "OPÇÃO: " opc_del
 if [ "$opc_del" = "1" ]; then
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[4]} TODOS USUARIOS CADASTRADOS"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 select_users
 name="$select_name"
 if [ "$name" = "" ]; then
@@ -190,7 +190,7 @@ return
 fi
 if [ "$OPENVPN" = "on" ]; then
 open_2 $name
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 return
 fi
 userdel --force $name > /dev/null 2>/dev/null
@@ -202,14 +202,14 @@ fi
 if [ -e $dir_user/$name ]; then
 rm $dir_user/$name
 fi
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e " $name ${cor[2]} Removido "
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 return
 fi
  if [ "$opc_del" = "2" ]; then
 for name in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi system-`; do
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} Remover $name ?"
 read -p " [S/N]: " _remover_
 if [[ "$_remover_" = "s" || "$_remover_" = "S" ]]; then
@@ -230,7 +230,7 @@ sleep 0.3s
  fi
 fi
 done
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 else
 return
 fi
@@ -238,19 +238,19 @@ fi
 
 
 function_3 () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[4]} EDITOR DE USUARIOS"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 select_users
 if [ "$select_name" = "" ]; then
 return
 fi
 namer="$select_name"
 echo -e "${cor[5]} O que Vamos Editar de: $namer"
-echo -e "${cor[2]} [1] •${cor[3]} Numero de logins de: $namer"
-echo -e "${cor[2]} [2] •${cor[3]} Data de expiraçao de: $namer"
-echo -e "${cor[2]} [3] •${cor[3]} Mudar senha de: $namer"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[2]} [1] \033[1;31m>${cor[3]} Numero de logins de: $namer"
+echo -e "${cor[2]} [2] \033[1;31m>${cor[3]} Data de expiraçao de: $namer"
+echo -e "${cor[2]} [3] \033[1;31m>${cor[3]} Mudar senha de: $namer"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 read -p " OPÇÃO: " _opt
 if [ "$_opt" = "1" ]; then
 read -p "Qual o novo limite de loguins: " new_limit
@@ -307,9 +307,9 @@ fi
 }
 
 function_4 () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[4]}  >  Usuario    Senha   Limite     Uso        Tempo"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 _cont="0"
 if [ ! -e $tempousers ]; then
 touch $tempousers
@@ -379,20 +379,20 @@ echo -e " ${cor[2]} > ${cor[7]} ${txto[1]} ${txto[2]} ${txto[3]} ${txto[4]} ${tx
 fi
 _cont=$(($_cont + 1))
 done
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e " ∆ Você Tem: $_cont Usuarios Em Seu Servidor"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 unset txt_
 }
 
 function_5 () {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 msga[1]=$(printf '%-12s' "USUARIO")
 msga[2]=$(printf '%-9s' "CONEXAO")
 msga[3]=$(printf '%-6s' "TEMPO HH:MM")
 echo -e "${cor[4]} ${msga[1]} ${msga[2]} ${msga[3]} ${cor[0]}"
 unset msga
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 [[ ! -e $tempousers ]] && touch $tempousers
 _data_now=$(date +%s)
 for user in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi system-`; do
@@ -424,12 +424,12 @@ algumon="on"
 fi
 done
 [[ "$algumon" = "" ]] &&  echo -e "\033[1;31m Nao ha nenhum Usuário Online" && unset algumon
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 }
 
 function_6 () {
 unset _removidos
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 datenow=$(date +%s)
 for user in $(awk -F: '{print $1}' /etc/passwd); do
 expdate=$(chage -l $user|awk -F: '/Account expires/{print $2}')
@@ -451,7 +451,7 @@ if [ "$_removidos" = "" ]; then
 echo -e "${cor[5]} Nao Existe Usuarios Vencidos!"
 unset _removidos
 fi
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 }
 
 txt_font () {
@@ -527,7 +527,7 @@ elif [[ "$sin_nao" = @(n|N) ]]; then
 break
 fi
 done
-echo '</h8><font color="purple">ADM-ULTIMATE</font></h8>' >> $local
+echo '</h8><font color="purple">OLD-ULTIMATE</font></h8>' >> $local
 echo '<h1><font>=============================</font></h1>' >> $local
 if [ -e "$local2" ]; then
 rm $local2  > /dev/null 2>&1
@@ -542,9 +542,9 @@ return 0
 }
 limiter_fun () {
 [[ "$VERIFICAR" = "on" ]] && {
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[5]} LIMITER ESTÁ RODANDO ${cor[0]}"
-echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+echo -e "${cor[1]} ====================================================== ${cor[0]}"
 return
 }
    if [[ $limiter_on = "" ]]; then
@@ -552,16 +552,16 @@ return
    chmod +x /etc/adm-lite/limiter.sh &
    /etc/adm-lite/limiter.sh &
    screen -dmS Limiter-ssh /etc/adm-lite/limiter.sh
-   echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+   echo -e "${cor[1]} ====================================================== ${cor[0]}"
    echo -e "${cor[5]} LIMITER INICIADO ${cor[0]}"
-   echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+   echo -e "${cor[1]} ====================================================== ${cor[0]}"
    else
    unset limiter_on
    killall limiter.sh > /dev/null 2>&1
    kill -9 $(ps x|grep -v grep|grep limiter.sh|awk '{print $1}')
-   echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+   echo -e "${cor[1]} ====================================================== ${cor[0]}"
    echo -e "${cor[5]} LIMITER PARADO ${cor[0]}"
-   echo -e "${cor[1]} =×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=× ${cor[0]}"
+   echo -e "${cor[1]} ====================================================== ${cor[0]}"
    fi
 }
 [[ "$1" = "1" ]] && function_1
