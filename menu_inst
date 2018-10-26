@@ -581,7 +581,8 @@ cat > /etc/openvpn/client-common.txt <<EOF
 # OVPN_ACCESS_SERVER_PROFILE=Old-Ultimate
 client
 dev tun
-remote ${SERVER_IP} ${PORT} ${PROTOCOL}
+remote /OpenVPN? ${PORT} ${PROTOCOL}
+http-proxy-option CUSTOM-HEADER Host ${SERVER_IP}
 http-proxy ${SERVER_IP} ${PPROXY}
 $CIPHER
 comp-lzo yes
