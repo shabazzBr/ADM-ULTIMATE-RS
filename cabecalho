@@ -484,7 +484,12 @@ usermod -p $(openssl passwd -1 $senha) $CLIENT
 echo -e " Criar um novo arquivo OpenVPN?"
 echo -e "${cor[1]} ====================================================== \033[1;37m"
 read -p " [S/N]: " -e -i S newfile
-  [[ ${newfile} = @(s|S|y|Y) ]] && {$HOME/$CLIENT.ovpn
+  [[ ${newfile} = @(s|S|y|Y) ]] && {	  [[ ${newfile} = @(s|S|y|Y) ]] && {$HOME/$CLIENT.ovpn
+  echo -e " Criar arquivo com autenticação (usuario e senha)?"	
+  read -p " [S/N]: " -e -i S ovpnauth	
+  [[ ${ovpnauth} != @(s|S|y|Y) ]] && sed -i "s;auth-user-pass;<auth-user-pass>\n$CLIENT\n$senha\n</auth-user-pass>;g" $HOME/$CLIENT.ovpn	
+  cd $HOME	  cd $HOME
+  zip ./$CLIENT.zip ./$CLIENT.ovpn > /dev/null 2>&1
   cd $HOME
   zip ./$CLIENT.zip ./$CLIENT.ovpn > /dev/null 2>&1
   echo -e "\033[1;31m Arquivo gerado em: ($HOME/$CLIENT.zip)"
