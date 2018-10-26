@@ -127,8 +127,17 @@ elif [[ -d /etc/squid3 ]]; then
 var_squid="/etc/squid3/squid.conf"
 fi
 if [[ "$proxy_opt" = @(02|2) ]]; then
-echo -e "#ConfiguracaoSquiD
-acl url0 dstdomain -i /
+echo -e "#portas" > $var_squid
+for pts in $(echo -e $PORT); do
+echo -e "http_port $pts" >> $var_squid
+done
+echo -e "
+#nome
+visible_hostname OLD-ULTIMATE
+
+#ConfiguracaoSquiD
+acl barr1 dstdomain -i /chat
+acl barr2 dstdomain -i /OpenVPN?
 acl url1 dstdomain -i $ip
 acl url2 dstdomain -i 127.0.0.1
 acl url3 url_regex -i '/etc/payloads'
@@ -150,7 +159,8 @@ acl accept dstdomain -i NETDATA
 acl accept dstdomain -i MOVE
 acl all src 0.0.0.0/0
 
-http_access allow url0
+http_access allow barr2
+http_access allow barr2
 http_access allow url1
 http_access allow url2
 http_access allow url3
@@ -197,8 +207,11 @@ reply_header_access Via deny all
 reply_header_access X-Cache deny all
 reply_header_access X-Cache-Lookup deny all
 
-
-#portas" > $var_squid
+via off
+forwarded_for off
+pipeline_prefetch off" >> $var_squid
+ else
+echo -e "#portas" > $var_squid
 for pts in $(echo -e $PORT); do
 echo -e "http_port $pts" >> $var_squid
 done
@@ -206,32 +219,22 @@ echo -e "
 #nome
 visible_hostname OLD-ULTIMATE
 
-via off
-forwarded_for off
-pipeline_prefetch off" >> $var_squid
- else
-echo -e "#ConfiguracaoSquiD
-acl url0 dstdomain -i /
+#ConfiguracaoSquiD
+acl barr1 dstdomain -i /chat
+acl barr2 dstdomain -i /OpenVPN?
 acl url1 dstdomain -i $ip
 acl url2 dstdomain -i 127.0.0.1
 acl url3 url_regex -i '/etc/payloads'
 acl url4 dstdomain -i localhost
 acl all src 0.0.0.0/0
 
-http_access allow url0
+http_access allow barr1
+http_access allow barr2
 http_access allow url1
 http_access allow url2
 http_access allow url3
 http_access allow url4
 http_access deny all
-
-#portas" > $var_squid
-for pts in $(echo -e $PORT); do
-echo -e "http_port $pts" >> $var_squid
-done
-echo -e "
-#nome
-visible_hostname ADM-MANAGER
 
 via off
 forwarded_for off
@@ -257,16 +260,16 @@ fun_dropbear () {
  fun_bar "apt-get remove dropbear -y"
  echo -e "$barra\n\033[1;32m Dropbear Removido\n$barra"
  [[ -e /etc/default/dropbear ]] && rm /etc/default/dropbear
- user -k 443/tcp > /dev/null 2>&1
+ user -k 2424/tcp > /dev/null 2>&1
  return 0
  }
 echo -e "$barra\n\033[1;32m INSTALADOR DROPBEAR\n$barra"
-echo -e " DROPBEAR USARÁ A PORTA 443\033[1;37m"
+echo -e " DROPBEAR USARÁ A PORTA 2424\033[1;37m"
 echo -e "$barra"
-   [[ $(mportas|grep 443) != "" ]] && {
-   echo -e "\033[1;31m PORTA 443 EM USO\033[1;37m"
+   [[ $(mportas|grep 2424) != "" ]] && {
+   echo -e "\033[1;31m PORTA 2424 EM USO\033[1;37m"
    echo -e "\033[1;31m TENTE NOVAMENTE\033[1;37m"
-   fuser -k 443/tcp > /dev/null 2>&1
+   fuser -k 2424/tcp > /dev/null 2>&1
    echo -e "$barra"
    return 1
    }
@@ -281,7 +284,7 @@ echo -e "$barra"
 touch /etc/dropbear/banner
 echo -e "${cor[2]} Configurando dropbear"
 echo -e "NO_START=0" > /etc/default/dropbear
-echo -e 'DROPBEAR_EXTRA_ARGS="-p 443"' >> /etc/default/dropbear
+echo -e 'DROPBEAR_EXTRA_ARGS="-p 2424"' >> /etc/default/dropbear
 echo -e 'DROPBEAR_BANNER="/etc/dropbear/banner"' >> /etc/default/dropbear
 echo -e "DROPBEAR_RECEIVE_WINDOW=65536" >> /etc/default/dropbear
 } || {
@@ -292,7 +295,7 @@ touch /etc/dropbear/banner
 echo -e "$barra"
 echo -e "${cor[2]} Configurando dropbear"
 echo -e "NO_START=0" > /etc/default/dropbear
-echo -e 'DROPBEAR_EXTRA_ARGS="-p 443"' >> /etc/default/dropbear
+echo -e 'DROPBEAR_EXTRA_ARGS="-p 2424"' >> /etc/default/dropbear
 echo -e 'DROPBEAR_BANNER="/etc/dropbear/banner"' >> /etc/default/dropbear
 echo -e "DROPBEAR_RECEIVE_WINDOW=65536" >> /etc/default/dropbear
 }
