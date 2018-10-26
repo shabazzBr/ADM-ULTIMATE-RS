@@ -343,7 +343,7 @@ unset SEC
 unset MIN
 unset HOR
 SEC=$(cat $tempousers | grep "$namer" | awk '{print $2}')
-number_var $SEC
+#number_var $SEC
 if [ "$var_number" = "" ]; then
 SEC="0"
  else
