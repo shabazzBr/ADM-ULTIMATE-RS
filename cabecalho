@@ -56,24 +56,11 @@ echo -e "${cor[5]} Tem Certeza Disso?"
 read -p " [ s / n ]: " certe_za
 [[ "$certe_za" = @(s|S|y|Y) ]] && {
 [[ -e /etc/openvpn/server.conf ]] && rmv_open & > /dev/null 2>&1
-echo -e "${cor[5]} Unistaling python${cor[0]}"
-fun_bar 'apt-get purge python' 'apt-get purge python3-pip'
-echo -e "${cor[5]} Unistaling Nmap${cor[0]}"
-fun_bar 'apt-get purge screen' 'apt-get purge nmap'
-echo -e "${cor[5]} Unistaling curl${cor[0]}"
-fun_bar 'apt-get purge figlet' 'apt-get purge zip'
-echo -e "${cor[5]} Unistaling Dropbear/Squid${cor[0]}"
-fun_bar 'apt-get purge bc' 'apt-get purge lynx'
-echo -e "${cor[5]} Unistaling Apache2${cor[0]}"
-fun_bar 'apt-get purge curl' 'apt-get purge squid'
-echo -e "${cor[5]} Unistaling Libs${cor[0]}"
-fun_bar 'apt-get purge squid3' 'apt-get purge dropbear'
-echo -e "${cor[5]} Unistaling Scripts${cor[0]}"
-fun_bar 'apt-get purge apache2' 'apt-get purge php5 libapache2-mod-php5 php5-mcrypt'
-apt-get autoremove -y > /dev/null 2>&1
-echo -e "${cor[5]} SUCESS! :D${cor[0]}"
 [[ -e /etc/adm-lite ]] && rm -rf /etc/adm-lite
 echo -e "\033[0m"
+sleep 1
+echo -e "${cor[5]} SUCESS! :D${cor[0]}"
+
  echo -e "${cor[1]} ====================================================== ${cor[0]}"
  exit
   } || {
@@ -469,19 +456,16 @@ return 0
 
 #GERA NOVO CLIENTE
 newclient () {
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	cat /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
+cp /etc/openvpn/client-common.txt $HOME/$1.ovpn
+echo "<key>
+$(cat /etc/openvpn/client-key.pem)
+</key>
+<cert>
+$(cat /etc/openvpn/client-cert.pem)
+</cert>
+<ca>
+$(cat /etc/openvpn/ca.pem)
+</ca>" >> $HOME/$1.ovpn
 }
 
 open_1 () {
