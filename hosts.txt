@@ -4,6 +4,8 @@
 .vivo.com.br
 .oi.com.br 
 .cloudfront.net
+.whatsapp.net
+.whatsapp.com
 .navegue.vivo.com.br/pre
 .navegue.vivo.com.br/controle
 .portalrecarga.vivo.com.br/recarga
