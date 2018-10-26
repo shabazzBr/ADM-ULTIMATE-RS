@@ -91,7 +91,6 @@ service ssh restart
 wget -O trans https://raw.githubusercontent.com/twossh/ADM-ULTIMATE-RS/master/trans -o /dev/null 2>&1
 mv -f ./trans /bin/ && chmod 777 /bin/*
 id="pt"
-esac
 echo -e "${cor[6]} ======================================================"
 echo -e "${cor[2]} Script Mod by:\033[1;37m @TwoSSH\033[0m"
 echo -e "${cor[6]} ======================================================"
