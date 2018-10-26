@@ -473,8 +473,6 @@ CLIENT="$1"
 senha="$2"
 daysrnf="$3"
 limit="$4"
-cd /etc/openvpn/easy-rsa/
-./easyrsa build-client-full $CLIENT nopass
 newclient "$CLIENT"
 #echo ""
 #echo "$CLIENT KEY" ~/"$CLIENT.ovpn"
