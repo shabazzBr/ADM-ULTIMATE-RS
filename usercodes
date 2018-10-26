@@ -141,9 +141,12 @@ echo -e "${cor[5]} Usuario: ${cor[4]}$name"
 echo -e "${cor[5]} Senha: ${cor[4]}$pass"
 echo -e "${cor[5]} Limite: ${cor[4]}$limit"
 echo -e "${cor[5]} Validade: ${cor[4]}$datexp"
+if [ "$OPENVPN" = "on" ]; then
+open_1 $name $pass $daysrnf $limit s
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
 rm ./$CLIENT.ovpn > /dev/null 2>&1
 return
+fi
 valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
 datexp=$(date "+%d/%m/%Y" -d " +$daysrnf days")
 useradd -M -s /bin/false $name -e $valid
@@ -153,15 +156,12 @@ echo -e "${cor[5]} Usuario: ${cor[4]}$name"
 echo -e "${cor[5]} Senha: ${cor[4]}$pass"
 echo -e "${cor[5]} Limite: ${cor[4]}$limit"
 echo -e "${cor[5]} Validade: ${cor[4]}$datexp"
-if [ "$OPENVPN" = "on" ]; then
-open_1 $name $pass $daysrnf $limit s
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo "senha: $pass" > $dir_user/$name
 echo "limite: $limit" >> $dir_user/$name
 echo "data: $valid" >> $dir_user/$name
 echo -ne "${cor[2]}"
 return
-fi
 }
 
 function_2 () {
