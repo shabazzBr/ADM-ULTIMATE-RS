@@ -121,29 +121,21 @@ done
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo -e "${cor[4]} CRIADOR DE USUARIOS OLD-ULTIMATE"
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
-echo -e "${cor[5]} Nome do novo usuario:"; read -p " ≈≈≈≈≈> " name
+read -p " Login: " name
 if [ -z $name ]; then
-echo -e "${cor[5]} Nome Nulo ${cor[0]}" 
+echo -e "${cor[4]} Nome Nulo ${cor[0]}" 
 return
 fi
 if cat /etc/passwd |grep $name: |grep -vi [a-z]$name |grep -v [0-9]$name > /dev/null
 then
-echo -e "${cor[5]} Usuário Já existente! ${cor[0]}"
+echo -e "${cor[4]} Usuário Já existente! ${cor[0]}"
 return
 fi
-echo -e "${cor[1]} ====================================================== ${cor[0]}"
-echo -e "${cor[5]} Senha Para o Usuario $name"
 read -p " Senha: " pass
-echo -e "${cor[1]} ====================================================== ${cor[0]}"
-echo -e "${cor[5]} Duração Para O Usuario  $name"
 read -p " Validade: " daysrnf
-echo -e "${cor[1]} ====================================================== ${cor[0]}"
-echo -e "${cor[5]} Limite de Conexão Para o Usuario  $name"
 read -p " Limite: " limit
 echo -e "${cor[1]} ======================================================× ${cor[0]}"
 meu_ip
-if [ "$OPENVPN" = "on" ]; then
-open_1 $name $pass $daysrnf $limit s
 echo -e "${cor[5]} IP => ${cor[4]}$IP"
 echo -e "${cor[5]} Usuario: ${cor[4]}$name"
 echo -e "${cor[5]} Senha: ${cor[4]}$pass"
@@ -162,6 +154,8 @@ echo -e "${cor[5]} Usuario: ${cor[4]}$name"
 echo -e "${cor[5]} Senha: ${cor[4]}$pass"
 echo -e "${cor[5]} Limite: ${cor[4]}$limit"
 echo -e "${cor[5]} Validade: ${cor[4]}$datexp"
+if [ "$OPENVPN" = "on" ]; then
+open_1 $name $pass $daysrnf $limit s
 echo -e "${cor[1]} ====================================================== ${cor[0]}"
 echo "senha: $pass" > $dir_user/$name
 echo "limite: $limit" >> $dir_user/$name
